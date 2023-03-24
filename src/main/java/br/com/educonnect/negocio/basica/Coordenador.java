@@ -7,15 +7,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Docente extends Pessoa{
+public class Coordenador extends Docente{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(unique = true, nullable = false)
 	private long id;
-
-	public Docente() {
-		super();
+	
+	public Coordenador() {
 	}
 	
 	

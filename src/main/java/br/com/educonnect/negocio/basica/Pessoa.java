@@ -1,6 +1,7 @@
 package br.com.educonnect.negocio.basica;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -24,13 +25,14 @@ public abstract class Pessoa {
 	@Column(unique = true, nullable = false)
 	private long id;
 	
-	@Column(name = "nome", nullable = false, length = 128)
+	@Column(nullable = false, length = 128)
 	private String nome;
 	
 	@Temporal(TemporalType.DATE)
+	@Column(nullable = false)
 	private Date dataNasc;
 	
-	@Column(name = "nome", nullable = false, length = 14)
+	@Column(nullable = false, length = 14)
 	private String cpf;
 
 	@Column(unique = true, nullable = true)
@@ -43,14 +45,19 @@ public abstract class Pessoa {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Login login;
+	@OneToMany
+	private List<Matricula> matriculas;
+
 	//JPA required empty constructor
 	public Pessoa() {}
 	
 	public Pessoa(String nome, Date dataNasc, String cpf, String email, String phone) {
-		this.nome = nome;
-		this.dataNasc = dataNasc;
-		this.cpf = cpf;
-		this.email = email;
+		this.setNome(nome);
+		this.setDataNasc(dataNasc);
+		this.setCpf(cpf);
+		this.setEmail(email);
 		this.setPhone(phone);
 	}
 	
@@ -92,5 +99,20 @@ public abstract class Pessoa {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
 }

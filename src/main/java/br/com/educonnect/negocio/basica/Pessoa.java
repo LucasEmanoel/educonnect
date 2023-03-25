@@ -3,6 +3,7 @@ package br.com.educonnect.negocio.basica;
 import java.util.Date;
 import java.util.List;
 
+import br.com.educonnect.negocio.MatriculaIgualException;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,6 +48,7 @@ public abstract class Pessoa {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Login login;
+	
 	@OneToMany
 	private List<Matricula> matriculas;
 
@@ -60,8 +62,20 @@ public abstract class Pessoa {
 		this.setEmail(email);
 		this.setPhone(phone);
 	}
+	//uma disciplina pode ter varios horarios.
+	//uma disciplina pode ser ministrada por prof diferentes
+	public void solicitarMatricula(int semestre, Disciplina dis) throws MatriculaIgualException {
+		Matricula mat = new Matricula(semestre, dis);
+		
+		if(!matriculas.contains(mat)) {
+			this.matriculas.add(mat);
+		} else {
+			MatriculaIgualException ex = new MatriculaIgualException(semestre, dis);
+			throw ex;
+		}
+	}
 	
-	//JPA required all get and set.
+	//JPA require all getters and setters.
 	public long getId() {
 		return id;
 	}

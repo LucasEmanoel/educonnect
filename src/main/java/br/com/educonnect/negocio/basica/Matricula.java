@@ -1,6 +1,7 @@
 package br.com.educonnect.negocio.basica;
 
 import java.util.Date;
+import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -45,6 +46,13 @@ public class Matricula {
 		this.disciplina = disciplina;
 	}
 
+	
+
+	public Matricula(int semestre, Disciplina disciplina) {
+		super();
+		this.semestre = semestre;
+		this.disciplina = disciplina;
+	}
 
 	public long getId() {
 		return id;
@@ -76,4 +84,23 @@ public class Matricula {
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(disciplina, semestre);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Matricula other = (Matricula) obj;
+		return Objects.equals(disciplina, other.disciplina) && semestre == other.semestre;
+	}
+	
+	
 }

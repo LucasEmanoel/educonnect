@@ -1,4 +1,4 @@
-package br.com.educonnect.negocio.basica;
+package src.main.java.br.com.educonnect.negocio.basica;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

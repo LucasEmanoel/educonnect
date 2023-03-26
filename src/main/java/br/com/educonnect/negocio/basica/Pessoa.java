@@ -1,4 +1,4 @@
-package br.com.educonnect.negocio.basica;
+package src.main.java.br.com.educonnect.negocio.basica;
 
 import java.util.Date;
 import java.util.List;

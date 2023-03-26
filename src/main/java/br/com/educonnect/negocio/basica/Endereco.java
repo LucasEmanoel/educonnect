@@ -1,4 +1,4 @@
-package br.com.educonnect.negocio.basica;
+package src.main.java.br.com.educonnect.negocio.basica;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

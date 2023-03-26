@@ -1,5 +1,3 @@
-package src.main.java.br.com.educonnect.negocio.basica;
-
 public class Ementa {
     private String id;
     private String descricao;
@@ -13,8 +11,5 @@ public class Ementa {
         this.descricao = descricao;
     }
     
-/* Posteriormente usar
- * Método de acesso a descrição da ementa
- * System.out.println("Ementa: "+disciplina1.getEmeta().getDescricao()));
- */ 
+    // getters e setters
 }

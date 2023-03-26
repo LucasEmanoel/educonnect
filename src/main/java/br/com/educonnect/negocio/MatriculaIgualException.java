@@ -1,4 +1,4 @@
-package br.com.educonnect.negocio;
+package src.main.java.br.com.educonnect.negocio;
 
 import br.com.educonnect.negocio.basica.Disciplina;
 

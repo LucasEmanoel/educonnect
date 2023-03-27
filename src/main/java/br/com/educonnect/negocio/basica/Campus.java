@@ -1,25 +1,33 @@
 package src.main.java.br.com.educonnect.negocio.basica;
 import java.util.ArrayList;
 
-public class Campus {
+import javax.persistence.Entityl;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "campi")
+public class Campus {
+	
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
+		
         private String nome;
-        private ArrayList<Cursos> curso;
         
-        public Campus(int id, String nome) {
-            this.id = id;
+        @ManyToOne
+        private Universidade universidade;
+        
+        public Campus() {}
+        
+        public Campus(String nome, Universidade universidade) {
             this.nome = nome;
-            this.curso = new ArrayList<Campus>();
+            this.universidade = universidade;
         }
         
-        public int getId() {
-            return id;
-        }
-        
-        public void setId(int id) {
-            this.id = id;
-        }
         public String getNome() {
             return nome;
         }

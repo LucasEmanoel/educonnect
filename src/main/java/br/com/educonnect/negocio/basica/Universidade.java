@@ -1,22 +1,30 @@
 package src.main.java.br.com.educonnect.negocio.basica;
-import java.util.ArrayList;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.List;
+
+@Entity
+@Table(name = "universidades")
 public class Universidade {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
     private String nome;
-    private ArrayList<Campus> campi;
     
-    public Universidade(int id, String nome) {
-        this.id = id;
+    @OneToMany(mappedBy = "universidade")
+    private List<Campus> campi;
+    
+    public Universidade(String nome) {
         this.nome = nome;
-        this.campi = new ArrayList<Campus>();
     }
-    
-    public int getId() {
-        return id;
-    }
-    
+
     public String getNome() {
         return nome;
     }
@@ -29,7 +37,5 @@ public class Universidade {
         this.campi.add(campus);
     }
     
-    Universidade universidade = new Universidade(01, "Universidade Federal de Pernambuco");
-        
 }    
 

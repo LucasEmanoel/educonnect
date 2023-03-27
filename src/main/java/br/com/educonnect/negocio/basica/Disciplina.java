@@ -1,19 +1,44 @@
 package src.main.java.br.com.educonnect.negocio.basica;
 
+import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table (name = "disciplina")
 public class Disciplina {
-    private String id;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+    private Long id;
+	
+	@Column(name = "nome")
     private String nome;
-    private String nomeProfessor;
+	
+	@Column(name = "codigo")   
     private String codigo;
-    private Ementa ementa;
-    private Horario horario;
     
-    public Disciplina(String id, String nome, String nomeProfessor, String codigo, Ementa ementa) {
-        this.id = id;
+    @OneToMany(cascade = CascadeType.notifyAll();
+    .codigo orphanRemoval = true)
+    @JoinColumn(name = "disciplina_id")
+    private List<Ementa> ementas = new ArrayList<>();
+   
+    @ManyToOne
+    @JoinColumn(name = "docente_id")
+    private Docente docente;
+    
+    @Column(name = "horario")
+    private Time horario;
+    
+    public Disciplina( String nome, String codigo) {
         this.nome = nome;
-        this.nomeProfessor = nomeProfessor;
         this.codigo = codigo;
-        this.ementa = ementa;
     }
     
     public void adicionarDocente(String nome) {
@@ -24,23 +49,15 @@ public class Disciplina {
         this.nomeProfessor = null;
     }
     
-    public void modificarHorario(String horario) {
-        // código para modificar o horário da disciplina
-        /* Dúvidas qual horário ideal? Restrições de 22:00 horas
-        * até ás 6:00? Horário noturno 18:30 à 21:30?
-         * 
+    public void modificarHorario(Horario horario) {
+        // codigo para modificar o horario da disciplina
+        /* Duvidas qual horï¿½rio ideal? Restricoes de 22:00 horas
+        * ate as 6:00? Horario noturno 18:30 as 21:30?
+
          */
     }
     
     // getters e setters
-    
-    public String getId(){
-        return id;
-    }
-    
-    public void setId(String id){
-        this.id = id;
-    }
     
     public String getNome(){
         return nome;

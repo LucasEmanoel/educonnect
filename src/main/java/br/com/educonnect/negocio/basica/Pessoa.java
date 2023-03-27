@@ -19,40 +19,41 @@ import jakarta.persistence.TemporalType;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Pessoa {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(unique = true, nullable = false)
 	private long id;
-	
+
 	@Column(nullable = false, length = 128)
 	private String nome;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
 	private Date dataNasc;
-	
+
 	@Column(nullable = false, length = 14)
 	private String cpf;
 
 	@Column(unique = true, nullable = true)
 	private String email;
-	
-	//devo colocar em uma classe separada, para colocar OneToMany
+
+	// devo colocar em uma classe separada, para colocar OneToMany
 	@Column(unique = true, nullable = true)
 	private String phone;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Login login;
 	@OneToMany
 	private List<Matricula> matriculas;
 
-	//JPA required empty constructor
-	public Pessoa() {}
-	
+	// JPA required empty constructor
+	public Pessoa() {
+	}
+
 	public Pessoa(String nome, Date dataNasc, String cpf, String email, String phone) {
 		this.setNome(nome);
 		this.setDataNasc(dataNasc);
@@ -60,35 +61,44 @@ public abstract class Pessoa {
 		this.setEmail(email);
 		this.setPhone(phone);
 	}
-	
-	//JPA required all get and set.
+
+	// JPA required all get and set.
 	public long getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public Date getDataNasc() {
 		return dataNasc;
 	}
+
 	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
 	}
+
 	public String getCpf() {
 		return cpf;
 	}
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -100,6 +110,7 @@ public abstract class Pessoa {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	public Endereco getEndereco() {
 		return endereco;
 	}

@@ -31,8 +31,4 @@ public class Horario {
     public Time getHorario() {
         return horario;
     }
-
-    public void setHorario(Time horario) {
-        this.horario = horario;
-    }
 }

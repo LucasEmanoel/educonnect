@@ -1,0 +1,20 @@
+version: '3.7'
+services:    
+  educonnect-java:
+    image: educonnect
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    working_dir: /
+    environment: 
+      TZ: America/Recife
+    ports:
+      - "8080:8080"
+    command: mvn spring-boot:run
+    networks:
+      - poo-network
+
+networks:
+  poo-network:
+

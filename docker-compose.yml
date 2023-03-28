@@ -1,19 +1,46 @@
 version: '3.7'
 services:    
-  educonnect-java:
-    image: educonnect
+  database:
+    image: postgres:latest
     restart: always
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    working_dir: /
-    environment: 
+    environment:
       TZ: America/Recife
+      POSTGRES_ROOT_PASSWORD: springlucas
+      POSTGRES_USER: lucas
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DATABASE: educonnect
+      
     ports:
-      - "8080:8080"
-    command: mvn spring-boot:run
+      - "5432:5432"
     networks:
       - poo-network
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+        PGADMIN_DEFAULT_EMAIL: lucas2014.barros@gmail.com
+        PGADMIN_DEFAULT_PASSWORD: admin#2023%^A
+    ports:
+      - "5050:80"
+    depends_on:
+      - database
+    networks:
+      - poo-network
+  #backend:
+  #  image: educonnect
+   # restart: always
+   # build:
+    #  context: .
+    #  dockerfile: ./Dockerfile
+   # working_dir: /
+   # environment: 
+    #  TZ: America/Recife
+    #ports:
+    #  - "8080:8080"
+   # command: mvn spring-boot:run
+   # networks:
+   #   - poo-network
 
 networks:
   poo-network:

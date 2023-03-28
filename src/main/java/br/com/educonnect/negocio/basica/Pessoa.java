@@ -46,9 +46,6 @@ public abstract class Pessoa {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Login login;
-	
 	@OneToMany
 	private List<Matricula> matriculas;
 

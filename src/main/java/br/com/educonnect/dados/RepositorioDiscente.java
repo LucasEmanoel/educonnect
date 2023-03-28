@@ -1,14 +1,10 @@
 package br.com.educonnect.dados;
 
-import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.educonnect.negocio.basica.Discente;
 
-public interface RepositorioDiscente {
+public interface RepositorioDiscente extends JpaRepository<Discente, Long>{
 	
-	void createDiscente(Discente discente);
-	Discente searchByCod(String cod);
-	void removeDiscente(Discente discente);
-	void updateDiscente(Discente discente);
-	List<Discente> listDiscentes();
 }

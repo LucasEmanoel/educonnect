@@ -10,8 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 public class Matricula {
@@ -21,10 +19,7 @@ public class Matricula {
 	@Column(unique = true, nullable = false)
 	private long id;
 	
-	//Tem time = createAt no Banco
-	@Temporal(TemporalType.DATE)
 	private Date data;
-	
 	private int semestre;
 	
 	@OneToOne(cascade = CascadeType.ALL)

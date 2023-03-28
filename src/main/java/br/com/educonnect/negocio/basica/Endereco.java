@@ -11,7 +11,6 @@ public class Endereco {
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;
 	
-	//column e necessario ou e uma forma de especificar mais o banco ??
 	private String cep;
 	private String municipio;
 	private String uf;

@@ -1,11 +1,19 @@
 package br.com.educonnect.negocio.cadastro;
 
+
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.educonnect.dados.RepositorioMatricula;
 import br.com.educonnect.negocio.basica.Matricula;
 
-public class CadastroMatricula {
+
+@Service
+public class CadastroMatricula implements ICadastroMatricula{
+	
+	@Autowired
 	private RepositorioMatricula repositorioMatricula;
 	
 	public CadastroMatricula(RepositorioMatricula repositorioMatricula) {
@@ -13,25 +21,31 @@ public class CadastroMatricula {
 		this.repositorioMatricula = repositorioMatricula;
 	}
 
-	public void createDiscente(Matricula mat) {
-		this.repositorioMatricula.createDiscente(mat);
+	@Override
+	public Matricula procurarMatriculaId(long id) {
+		return this.repositorioMatricula.findById(id).orElse(null);
 	}
-	
-	public Matricula searchByCod(String cod) {
-		return this.repositorioMatricula.searchByCod(cod);
+
+	@Override
+	public List<Matricula> listarMatriculas() {
+		return this.repositorioMatricula.findAll();
 	}
-	
-	public void removeDiscente(Matricula mat) {
-		this.repositorioMatricula.removeDiscente(mat);
+
+	@Override
+	public void deletarMatriculaId(Long id) {
+		this.repositorioMatricula.deleteById(id);
+		
 	}
-	
-	public void updateDiscente(Matricula mat) {
-		this.updateDiscente(mat);
+
+	@Override
+	public Matricula salvarMatricula(Matricula matricula) {
+		return this.repositorioMatricula.save(matricula);
 	}
-	
-	public List<Matricula> listDiscentes(){
-		return this.repositorioMatricula.listDiscentes();
-	}
-	
+
+	@Override
+	public void deletarMatricula(Matricula matricula) {
+		this.repositorioMatricula.delete(matricula);
+		
+	}	
 	
 }

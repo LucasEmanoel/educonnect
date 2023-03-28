@@ -1,14 +1,10 @@
 package br.com.educonnect.dados;
 
-import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.educonnect.negocio.basica.Matricula;
 
-public interface RepositorioMatricula {
+public interface RepositorioMatricula extends JpaRepository<Matricula, Long>{
 	
-	void createDiscente(Matricula mat);
-	Matricula searchByCod(String cod);
-	void removeDiscente(Matricula mat);
-	void updateDiscente(Matricula mat);
-	List<Matricula> listDiscentes();
 }

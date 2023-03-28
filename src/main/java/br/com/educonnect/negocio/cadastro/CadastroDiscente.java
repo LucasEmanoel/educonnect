@@ -1,32 +1,51 @@
 package br.com.educonnect.negocio.cadastro;
 
+
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.educonnect.dados.RepositorioDiscente;
 import br.com.educonnect.negocio.basica.Discente;
 
-public class CadastroDiscente {
+
+@Service
+public class CadastroDiscente implements ICadastroDiscente {
+	
+	@Autowired
 	private RepositorioDiscente repositorioDiscente;
 
 	public CadastroDiscente(RepositorioDiscente repositorioDiscente) {
 		super();
 		this.repositorioDiscente = repositorioDiscente;
 	}
-	
-	public void createDiscente(Discente discente) {
-		this.repositorioDiscente.createDiscente(discente);
+
+	@Override
+	public Discente procurarDiscenteId(long id) {
+		return this.repositorioDiscente.findById(id).orElse(null);
 	}
-	public Discente searchByCod(String cod) {
-		return this.searchByCod(cod);
+
+	@Override
+	public List<Discente> listarDiscentes() {
+		return this.repositorioDiscente.findAll();
 	}
-	public void removeDiscente(Discente discente) {
-		this.repositorioDiscente.removeDiscente(discente);
+
+	@Override
+	public void deletarDiscenteId(Long id) {
+		this.repositorioDiscente.deleteById(id);;
+		
 	}
-	public void updateDiscente(Discente discente) {
-		this.repositorioDiscente.updateDiscente(discente);
+
+	@Override
+	public Discente salvarDiscente(Discente discente) {
+		return this.repositorioDiscente.save(discente);
 	}
-	public List<Discente> listDiscentes(){
-		return this.repositorioDiscente.listDiscentes();
+
+	@Override
+	public void deletarDiscente(Discente discente) {
+		this.repositorioDiscente.delete(discente);
+		
 	}
 	
 	

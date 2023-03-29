@@ -2,7 +2,7 @@ package br.com.educonnect.negocio.basica;
 
 import java.util.List;
 
-import br.com.educonnect.negocio.MatriculaIgualException;
+import br.com.educonnect.negocio.exception.MatriculaIgualException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

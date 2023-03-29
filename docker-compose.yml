@@ -1,23 +1,22 @@
 version: '3.7'
 services:    
   database:
-    image: postgres:latest
+    image: postgres:alpine3.17
     restart: always
     environment:
       TZ: America/Recife
-      POSTGRES_ROOT_PASSWORD: springlucas
-      POSTGRES_USER: lucas
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DATABASE: educonnect
-      
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: educonnect
     ports:
       - "5432:5432"
     networks:
       - poo-network
     volumes:
-      - ./db-data/:/var/lib/postgresql/data/
+      - db:/var/lib/postgresql/data/
   pgadmin:
     image: dpage/pgadmin4
+    restart: always
     environment:
         PGADMIN_DEFAULT_EMAIL: lucas2014.barros@gmail.com
         PGADMIN_DEFAULT_PASSWORD: admin#2023%^A
@@ -27,21 +26,27 @@ services:
       - database
     networks:
       - poo-network
-  #backend:
-  #  image: educonnect
-   # restart: always
-   # build:
-    #  context: .
-    #  dockerfile: ./Dockerfile
-   # working_dir: /
-   # environment: 
-    #  TZ: America/Recife
-    #ports:
-    #  - "8080:8080"
-   # command: mvn spring-boot:run
-   # networks:
-   #   - poo-network
-
+      
+  backend:
+    image: educonnect
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    working_dir: /
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/educonnect
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update	
+      TZ: America/Recife
+    ports:
+      - "8080:8081"
+    command: mvn spring-boot:run
+    networks:
+      - poo-network
 networks:
   poo-network:
 
+volumes:
+  db: 

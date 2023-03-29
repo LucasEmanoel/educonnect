@@ -1,4 +1,4 @@
-package br.com.educonnect.negocio;
+package br.com.educonnect.negocio.exception;
 
 import br.com.educonnect.negocio.basica.Disciplina;
 

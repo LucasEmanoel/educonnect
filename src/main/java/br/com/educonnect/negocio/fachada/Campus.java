@@ -1,9 +1,6 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+package br.com.educonnect.negocio.basica;
+
+import jakarta.persistence.Entity;
 
 @Entity
 @Table(name = "campi")

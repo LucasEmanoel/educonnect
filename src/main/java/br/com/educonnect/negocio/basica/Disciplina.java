@@ -1,6 +1,6 @@
-
 package br.com.educonnect.negocio.basica;
 
+import jakarta.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 

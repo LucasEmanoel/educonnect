@@ -16,9 +16,14 @@ public class CadastroDocente implements ICadastroDocente{
 	private RepositorioDocente repoDis;
 	
 	@Override
-	public Docente procurarDocenteId(long id) {
-		// TODO Auto-generated method stub
-		return repoDis.findById(id).orElse(null);
+	public Docente procurarDocenteId(long id) throws DocenteNaoExisteException {
+		Docente doc = this.repoDis.findById(id).orElse(null);
+		
+		if(doc != null) {
+			return doc;
+		} else {
+			throw new DocenteNaoExisteException();
+		}
 	}
 
 	@Override
@@ -44,5 +49,8 @@ public class CadastroDocente implements ICadastroDocente{
 		repoDis.delete(docente);
 		
 	}
+	
+	
+	
 
 }

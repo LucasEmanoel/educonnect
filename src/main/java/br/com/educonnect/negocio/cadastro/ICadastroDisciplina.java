@@ -5,7 +5,7 @@ import java.util.List;
 import br.com.educonnect.negocio.basica.Disciplina;
 
 public interface ICadastroDisciplina {
-	Disciplina procurarDisciplinaId(long id);
+	Disciplina procurarDisciplinaId(long id) throws DisciplinaNaoExisteException;
 
 	List<Disciplina> listarDisciplinas();
 

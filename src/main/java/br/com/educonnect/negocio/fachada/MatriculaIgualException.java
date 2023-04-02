@@ -1,6 +1,5 @@
-package br.com.educonnect.negocio.exception;
+package br.com.educonnect.negocio.fachada;
 
-import br.com.educonnect.negocio.basica.Horario;
 import br.com.educonnect.negocio.basica.Turma;
 
 public class MatriculaIgualException extends Exception{
@@ -11,7 +10,7 @@ public class MatriculaIgualException extends Exception{
 	//private Disciplina disciplina;
 	
 
-	public MatriculaIgualException(Turma turma, Horario horario) {
+	public MatriculaIgualException(Turma turma) {
 		super("Nao podemos matricular duas vezes na mesma disciplina");
 		this.turma = turma;
 		//this.disciplina = disciplina;

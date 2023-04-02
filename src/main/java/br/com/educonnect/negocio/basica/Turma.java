@@ -1,6 +1,7 @@
 package br.com.educonnect.negocio.basica;
 
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -71,6 +72,24 @@ public class Turma {
 
 	public void setHorario(Horario horario) {
 		this.horario = horario;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(disciplina, docente, periodo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Turma other = (Turma) obj;
+		return Objects.equals(disciplina, other.disciplina) && Objects.equals(docente, other.docente)
+				&& Objects.equals(periodo, other.periodo);
 	}
 
 	

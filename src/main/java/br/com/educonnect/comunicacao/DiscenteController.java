@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.educonnect.negocio.basica.Discente;
+import br.com.educonnect.negocio.basica.Matricula;
+import br.com.educonnect.negocio.basica.Turma;
 import br.com.educonnect.negocio.cadastro.DiscenteEmailIgualException;
 import br.com.educonnect.negocio.fachada.Fachada;
 
@@ -41,6 +43,9 @@ public class DiscenteController {
 	public ResponseEntity<List<Discente>> listDiscentes(){
 		return ResponseEntity.ok(fachada.listarDiscentes());
 	}
-	// discente/matriculas
-	// 
+	
+	@PostMapping(value = "/discente/{idD}/matricula/{idT}")
+	public ResponseEntity<Object> adicionarDisciplina(@RequestBody Matricula mat, @PathVariable("idD") long idD, @PathVariable("idT") long idT){
+		return ResponseEntity.ok(fachada.adicionarMatricula(idD, mat, idT));
+	}
 }

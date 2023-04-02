@@ -16,9 +16,13 @@ public class CadastroDisciplina implements ICadastroDisciplina{
 	private RepositorioDisciplina repoDis;
 	
 	@Override
-	public Disciplina procurarDisciplinaId(long id) {
-		// TODO Auto-generated method stub
-		return repoDis.findById(id).orElse(null);
+	public Disciplina procurarDisciplinaId(long id) throws DisciplinaNaoExisteException {
+		Disciplina dis = repoDis.findById(id).orElse(null);
+		if(dis != null) {
+			return dis;
+		}else {
+			throw new DisciplinaNaoExisteException();
+		}
 	}
 
 	@Override

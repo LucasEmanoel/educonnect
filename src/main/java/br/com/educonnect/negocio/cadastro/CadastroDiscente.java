@@ -24,8 +24,14 @@ public class CadastroDiscente implements ICadastroDiscente {
 	}
 
 	@Override
-	public Discente procurarDiscenteId(long id) {
-		return this.repositorioDiscente.findById(id).orElse(null);
+	public Discente procurarDiscenteId(long id) throws DiscenteNaoExisteException {
+		Discente dis = this.repositorioDiscente.findById(id).orElse(null);
+		if(dis != null) {
+			return dis;
+		}else {
+			throw new DiscenteNaoExisteException();
+		}
+		
 	}
 	
 	@Override
@@ -42,6 +48,7 @@ public class CadastroDiscente implements ICadastroDiscente {
 	@Override
 	public Discente salvarDiscente(Discente discente) throws DiscenteEmailIgualException {
 		Discente dis = this.repositorioDiscente.findByEmail(discente.getEmail());
+		//Discente dis = this.procurarDiscenteEmail(discente.getEmail());
 		
 		if(dis == null) {
 			return this.repositorioDiscente.save(discente);
@@ -50,7 +57,12 @@ public class CadastroDiscente implements ICadastroDiscente {
 		throw ex;
 		
 	}
-
+	//when i need update discente
+	@Override
+	public Discente salvarDiscenteSemException(Discente discente) {
+		return this.repositorioDiscente.save(discente);
+	}
+	
 	@Override
 	public void deletarDiscente(Discente discente) {
 		this.repositorioDiscente.delete(discente);
@@ -58,8 +70,13 @@ public class CadastroDiscente implements ICadastroDiscente {
 	}
 
 	@Override
-	public Discente procurarDiscenteEmail(String email) {
-		return this.repositorioDiscente.findByEmail(email);
+	public Discente procurarDiscenteEmail(String email) throws DiscenteNaoExisteException {
+		Discente dis = this.repositorioDiscente.findByEmail(email);
+		if(dis != null) {
+			return dis;
+		}else {
+			throw new DiscenteNaoExisteException();
+		}
 	}
 
 

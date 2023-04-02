@@ -12,8 +12,13 @@ services:
       - "5432:5432"
     networks:
       - poo-network
-    volumes:
-      - db:/var/lib/postgresql/data/
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 100M
+        #volumes:
+        #- db:/var/lib/postgresql/data/
   pgadmin:
     image: dpage/pgadmin4
     restart: always
@@ -26,6 +31,11 @@ services:
       - database
     networks:
       - poo-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 100M
       
   backend:
     image: educonnect
@@ -46,6 +56,11 @@ services:
     command: mvn spring-boot:run
     networks:
       - poo-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: 300M
 networks:
   poo-network:
 

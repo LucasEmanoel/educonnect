@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.educonnect.negocio.basica.Docente;
+import br.com.educonnect.negocio.basica.Turma;
 import br.com.educonnect.negocio.fachada.Fachada;
 
 @RestController
@@ -35,9 +36,14 @@ public class DocenteController {
 		return ResponseEntity.ok(this.fachada.procurarDocenteId(id));
 	}
 	
-	
 	@GetMapping(value = "/docentes")
 	public ResponseEntity<List<Docente>> listDocentes(){
 		return ResponseEntity.ok(fachada.listarDocentes());
 	}
+	
+	@PostMapping(value = "/docente/{idDocente}/turma/{idD}")
+	public ResponseEntity<Object> ofertarDisciplina(@RequestBody Turma t, @PathVariable("idDocente") long idDocente, @PathVariable("idD") long idD){
+		return ResponseEntity.ok(this.fachada.ofertarDisciplina(idDocente, t, idD));
+	}
 }
+

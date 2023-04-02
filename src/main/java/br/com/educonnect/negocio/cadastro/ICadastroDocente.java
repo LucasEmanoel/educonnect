@@ -7,7 +7,7 @@ import br.com.educonnect.negocio.basica.Docente;
 public interface ICadastroDocente {
 	
 	
-	Docente procurarDocenteId(long id);
+	Docente procurarDocenteId(long id) throws DocenteNaoExisteException;
 
 	List<Docente> listarDocentes();
 

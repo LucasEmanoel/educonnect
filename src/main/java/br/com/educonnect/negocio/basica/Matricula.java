@@ -1,6 +1,7 @@
 package br.com.educonnect.negocio.basica;
 
 import java.util.Date;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -72,5 +73,23 @@ public class Matricula {
 	public void setTurma(Turma turma) {
 		this.turma = turma;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(turma);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Matricula other = (Matricula) obj;
+		return Objects.equals(turma, other.turma);
+	}
+	
 	
 }

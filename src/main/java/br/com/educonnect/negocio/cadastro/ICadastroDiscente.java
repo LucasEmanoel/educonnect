@@ -12,7 +12,9 @@ public interface ICadastroDiscente {
 
 	void deletarDiscenteId(Long id);
 
-	Discente salvarDiscente(Discente discente);
+	Discente salvarDiscente(Discente discente) throws DiscenteEmailIgualException;
 
 	void deletarDiscente(Discente discente);
+
+	Discente procurarDiscenteEmail(String email);
 }

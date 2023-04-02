@@ -11,9 +11,9 @@ public class Disciplina {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
 	private String disciplina;
 	
-
 	public Disciplina() {
 		super();
 	}
@@ -30,6 +30,7 @@ public class Disciplina {
 	public void setDisciplina(String disciplina) {
 		this.disciplina = disciplina;
 	}
+	
 	
 	
 }

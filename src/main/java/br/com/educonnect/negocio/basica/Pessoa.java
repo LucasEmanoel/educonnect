@@ -2,6 +2,7 @@ package br.com.educonnect.negocio.basica;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -19,10 +20,11 @@ public abstract class Pessoa {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(unique = true, nullable = false)
 	private long id;
 	
 	private String nome;
+	
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataNasc;
 	private String cpf;
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.educonnect.dados.RepositorioDiscente;
 import br.com.educonnect.negocio.basica.Discente;
+import br.com.educonnect.negocio.basica.Matricula;
 
 
 @Service
@@ -18,6 +19,7 @@ public class CadastroDiscente implements ICadastroDiscente {
 
 	public CadastroDiscente(RepositorioDiscente repositorioDiscente) {
 		super();
+		
 		this.repositorioDiscente = repositorioDiscente;
 	}
 
@@ -25,7 +27,7 @@ public class CadastroDiscente implements ICadastroDiscente {
 	public Discente procurarDiscenteId(long id) {
 		return this.repositorioDiscente.findById(id).orElse(null);
 	}
-
+	
 	@Override
 	public List<Discente> listarDiscentes() {
 		return this.repositorioDiscente.findAll();
@@ -38,8 +40,15 @@ public class CadastroDiscente implements ICadastroDiscente {
 	}
 
 	@Override
-	public Discente salvarDiscente(Discente discente) {
-		return this.repositorioDiscente.save(discente);
+	public Discente salvarDiscente(Discente discente) throws DiscenteEmailIgualException {
+		Discente dis = this.repositorioDiscente.findByEmail(discente.getEmail());
+		
+		if(dis == null) {
+			return this.repositorioDiscente.save(discente);
+		}
+		DiscenteEmailIgualException ex = new DiscenteEmailIgualException(discente.getEmail());
+		throw ex;
+		
 	}
 
 	@Override
@@ -47,6 +56,13 @@ public class CadastroDiscente implements ICadastroDiscente {
 		this.repositorioDiscente.delete(discente);
 		
 	}
+
+	@Override
+	public Discente procurarDiscenteEmail(String email) {
+		return this.repositorioDiscente.findByEmail(email);
+	}
+
+
 	
 	
 }

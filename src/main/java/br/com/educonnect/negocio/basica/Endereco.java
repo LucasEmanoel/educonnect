@@ -13,6 +13,8 @@ public class Endereco {
 	
 	private String cep;
 	private String municipio;
+	
+
 	private String uf;
 	private String logradouro;
 	private int numero;
@@ -67,5 +69,12 @@ public class Endereco {
 
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
+	}
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }

@@ -2,7 +2,6 @@ package br.com.educonnect.negocio.basica;
 
 import java.util.List;
 
-import br.com.educonnect.negocio.exception.MatriculaIgualException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +14,6 @@ public class Discente extends Pessoa{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(unique = true, nullable = false)
 	private long id;
 
 	@OneToMany
@@ -26,16 +24,16 @@ public class Discente extends Pessoa{
 		super();
 	}
 	
-	public void solicitarMatricula(int semestre, Disciplina dis) throws MatriculaIgualException {
-		Matricula mat = new Matricula(semestre, dis);
+	/*public void solicitarMatricula(int semestre, Disciplina dis) throws MatriculaIgualException {
+		//Matricula mat = new Matricula(semestre, dis);
 		
 		if(!matriculas.contains(mat)) {
 			this.matriculas.add(mat);
 		} else {
-			MatriculaIgualException ex = new MatriculaIgualException(semestre, dis);
-			throw ex;
+			//MatriculaIgualException ex = new MatriculaIgualException(semestre, dis);
+			//throw ex;
 		}
-	}
+	}*/
 	
 	public long getId() {
 		return id;
@@ -44,4 +42,13 @@ public class Discente extends Pessoa{
 	public void setId(long id) {
 		this.id = id;
 	}
+
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
+	
 }

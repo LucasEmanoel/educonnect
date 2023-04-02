@@ -1,8 +1,6 @@
 package br.com.educonnect.negocio.basica;
 
 
-import java.sql.Time;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,13 +12,13 @@ public class Horario {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;
-	private Time horario;
+	private String horario;
 	
 	
 	public Horario() {
 		super();
 	}
-	public Horario(Time horario) {
+	public Horario(String horario) {
 		super();
 		this.horario = horario;
 	}
@@ -30,10 +28,10 @@ public class Horario {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public Time getHorario() {
+	public String getHorario() {
 		return horario;
 	}
-	public void setHorario(Time horario) {
+	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 }

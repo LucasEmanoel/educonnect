@@ -1,9 +1,9 @@
 package br.com.educonnect.negocio.basica;
 
 import java.util.Date;
-import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,37 +16,34 @@ public class Matricula {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(unique = true, nullable = false)
 	private long id;
 	
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
 	private int semestre;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Horario horario;
-	
 	//nao deletar disciplina com cascade
 	@OneToOne
-	private Disciplina disciplina;
+	private Turma turma;
+	
 	
 	public Matricula() {
 		super();
 	}
 	
-	public Matricula(Date data, int semestre, Horario horario, Disciplina disciplina) {
+	public Matricula(Date data, int semestre, Horario horario, Turma turma) {
 		super();
 		this.data = data;
 		this.semestre = semestre;
-		this.horario = horario;
-		this.disciplina = disciplina;
+		this.turma = turma;
 	}
 
 	
 
-	public Matricula(int semestre, Disciplina disciplina) {
+	public Matricula(int semestre, Turma turma) {
 		super();
 		this.semestre = semestre;
-		this.disciplina = disciplina;
+		this.turma = turma;
 	}
 
 	public long getId() {
@@ -67,35 +64,13 @@ public class Matricula {
 	public void setSemestre(int semestre) {
 		this.semestre = semestre;
 	}
-	public Horario getHorario() {
-		return horario;
-	}
-	public void setHorario(Horario horario) {
-		this.horario = horario;
-	}
-	public Disciplina getDisciplina() {
-		return disciplina;
-	}
-	public void setDisciplina(Disciplina disciplina) {
-		this.disciplina = disciplina;
+
+	public Turma getTurma() {
+		return turma;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(disciplina, semestre);
+	public void setTurma(Turma turma) {
+		this.turma = turma;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Matricula other = (Matricula) obj;
-		return Objects.equals(disciplina, other.disciplina) && semestre == other.semestre;
-	}
-	
 	
 }

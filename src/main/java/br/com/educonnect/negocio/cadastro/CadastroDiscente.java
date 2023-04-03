@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.educonnect.dados.RepositorioDiscente;
 import br.com.educonnect.negocio.basica.Discente;
-import br.com.educonnect.negocio.basica.Matricula;
-
 
 @Service
 public class CadastroDiscente implements ICadastroDiscente {

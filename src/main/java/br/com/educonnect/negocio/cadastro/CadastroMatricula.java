@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.educonnect.dados.RepositorioMatricula;
+import br.com.educonnect.negocio.basica.Discente;
 import br.com.educonnect.negocio.basica.Matricula;
 
 
@@ -46,6 +47,11 @@ public class CadastroMatricula implements ICadastroMatricula{
 	public void deletarMatricula(Matricula matricula) {
 		this.repositorioMatricula.delete(matricula);
 		
-	}	
+	}
+
+	/*@Override
+	public List<Matricula> listarMatriculasByIdDiscente(long idDis) {
+		return this.repositorioMatricula.findAllByDiscente(idDis);
+	}*/	
 	
 }

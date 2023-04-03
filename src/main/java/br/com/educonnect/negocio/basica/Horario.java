@@ -1,6 +1,8 @@
 package br.com.educonnect.negocio.basica;
 
 
+import java.util.Objects;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,4 +37,23 @@ public class Horario {
 	public void setHorario(String horario) {
 		this.horario = horario;
 	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(horario);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Horario other = (Horario) obj;
+		return Objects.equals(horario, other.horario);
+	}
+	
+	
 }

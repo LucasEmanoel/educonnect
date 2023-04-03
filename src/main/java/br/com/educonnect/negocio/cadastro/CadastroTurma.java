@@ -40,7 +40,6 @@ public class CadastroTurma implements ICadastroTurma{
 	@Override
 	public void deletarTurmaId(Long id) {
 		this.repositorioTurma.deleteById(id);
-		
 	}
 
 	@Override
@@ -56,7 +55,7 @@ public class CadastroTurma implements ICadastroTurma{
 
 	@Override
 	public List<Turma> listarTurmasDocente(long id) {
-		return null;
+		return this.repositorioTurma.listTurmasByDocenteId(id);
 	}	
 	
 }

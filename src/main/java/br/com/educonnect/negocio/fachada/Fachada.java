@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.educonnect.negocio.basica.Discente;
@@ -64,11 +65,15 @@ public class Fachada {
 	public void deletarDisciplina(long id) {
 		this.cadastroDisciplina.deletarDisciplinaId(id);
 	}
-	public Object encontrarDisciplinaId(long id) throws DisciplinaNaoExisteException {
+	public Disciplina encontrarDisciplinaId(long id) throws DisciplinaNaoExisteException {
 		return this.cadastroDisciplina.procurarDisciplinaId(id);
 	}
 	
 	//DISCENTE
+	
+	public Discente procurarDiscenteId(long id) throws DiscenteNaoExisteException {
+		return this.cadastroDiscente.procurarDiscenteId(id);
+	}
 	
 	public List<Discente> listarDiscentes(){
 		return this.cadastroDiscente.listarDiscentes();
@@ -88,26 +93,45 @@ public class Fachada {
 		//exceção discente nao existe
 		Discente dis = this.cadastroDiscente.procurarDiscenteId(idD);
 		Turma turma = this.cadastroTurma.procurarTurmaId(idT);
-		//ver se o discente ja tem essa matricula criada
-		mat.setTurma(turma);
+		//ver se o discente ja tem essa matricula criada		
 		
-		if(dis.getMatriculas() != null) {
-			cadastroMatricula.salvarMatricula(mat);
-		} else if(!dis.getMatriculas().contains(mat)){
-			cadastroMatricula.salvarMatricula(mat);
-		}else {
-			throw new MatriculaIgualException(turma);
+		
+		if (dis.getMatriculas() != null) {
+		    if (!dis.getMatriculas().contains(mat)) {
+		        dis.getMatriculas().add(mat);
+		        mat.setTurma(turma);
+		        cadastroMatricula.salvarMatricula(mat);
+		        cadastroDiscente.salvarDiscenteSemException(dis);
+		    } else {
+		        throw new MatriculaIgualException(turma);
+		    }
+		} else {
+		    dis.setMatriculas(new ArrayList<Matricula>());
+		    dis.getMatriculas().add(mat);
+		    mat.setTurma(turma);
+		    cadastroMatricula.salvarMatricula(mat);
+		    cadastroDiscente.salvarDiscenteSemException(dis);
 		}
-		
-		dis.getMatriculas().add(mat);
-		//atualizar
-		cadastroDiscente.salvarDiscenteSemException(dis);
+
 		return mat;	
 	}
 	
-	public Discente procurarDiscenteId(long id) throws DiscenteNaoExisteException {
-		return this.cadastroDiscente.procurarDiscenteId(id);
+	public Matricula deletarMatriculaDiscente(long idMat, long idDiscente) throws DiscenteNaoExisteException {
+		Discente dis = this.cadastroDiscente.procurarDiscenteId(idDiscente);
+		Matricula mat = this.cadastroMatricula.procurarMatriculaId(idMat);
+		
+		dis.getMatriculas().remove(mat);
+		cadastroDiscente.salvarDiscenteSemException(dis);
+		cadastroMatricula.deletarMatriculaId(mat.getId());
+		return mat;
 	}
+	
+	public  List<Matricula> listMatriculasDiscente(long idDiscente) throws DiscenteNaoExisteException {
+		Discente dis = this.cadastroDiscente.procurarDiscenteId(idDiscente);
+		return dis.getMatriculas();
+	}
+	
+	
 	
 	public Discente procurarDiscenteEmail(String email) throws DiscenteNaoExisteException {
 		return this.cadastroDiscente.procurarDiscenteEmail(email);
@@ -128,7 +152,7 @@ public class Fachada {
 	public void deletarDocente(Docente docente) {
 		this.cadastroDocente.deletarDocente(docente);
 	}
-	public Object procurarDocenteId(long id) throws DocenteNaoExisteException {
+	public Docente procurarDocenteId(long id) throws DocenteNaoExisteException {
 		return this.cadastroDocente.procurarDocenteId(id);
 	}	
 	
@@ -140,16 +164,11 @@ public class Fachada {
 		
 		if(doc != null && disc != null) {
 			t.setDocente(doc);
-			//ta feio, olhar outra solucao
-			if(t.getDisciplina() == null) {
-				List<Disciplina> list = new ArrayList<Disciplina>();
-				list.add(disc);
-				t.setDisciplina(list);
-			}else {
-				t.getDisciplina().add(disc);
-			}
+			t.setDisciplina(disc);
+	
 			return this.cadastroTurma.salvarTurma(t);
 		}
+		//vou jogar exception aqui
 		return null;
 	}
 	
@@ -167,11 +186,23 @@ public class Fachada {
 	public void deletarTurma(Turma turma) {
 		this.cadastroTurma.deletarTurma(turma);
 	}
-	public Object procurarTurmaId(long id) throws TurmaNaoExisteException {
+	public Turma procurarTurmaId(long id) throws TurmaNaoExisteException {
 		return this.cadastroTurma.procurarTurmaId(id);
 	}
 	public Object procurarTurmasDoDocente(long id) {
 		return this.cadastroTurma.listarTurmasDocente(id);
 	}
+	public Turma deletarTurmaPorDocente(long idDocente, long idT) throws DocenteNaoExisteException, TurmaNaoExisteException {
+		//encontrar turma com id do docente
+		Turma turma = this.cadastroTurma.procurarTurmaId(idT);
+		
+		this.cadastroTurma.deletarTurmaId(idT);
+		return null;
+	}
+	public List<Turma> listarTurmasPorDocenteId(long idDocente) {
+		List<Turma> turmas = this.cadastroTurma.listarTurmasDocente(idDocente);
+		return turmas;
+	}
+	
 	
 }

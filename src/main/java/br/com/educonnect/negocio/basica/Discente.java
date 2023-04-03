@@ -2,7 +2,7 @@ package br.com.educonnect.negocio.basica;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,24 +16,13 @@ public class Discente extends Pessoa{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Matricula> matriculas;
 	
 	
 	public Discente() {
 		super();
 	}
-	
-	/*public void solicitarMatricula(int semestre, Disciplina dis) throws MatriculaIgualException {
-		//Matricula mat = new Matricula(semestre, dis);
-		
-		if(!matriculas.contains(mat)) {
-			this.matriculas.add(mat);
-		} else {
-			//MatriculaIgualException ex = new MatriculaIgualException(semestre, dis);
-			//throw ex;
-		}
-	}*/
 	
 	public long getId() {
 		return id;

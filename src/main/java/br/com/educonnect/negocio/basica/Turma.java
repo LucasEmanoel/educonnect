@@ -1,6 +1,5 @@
 package br.com.educonnect.negocio.basica;
 
-import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
@@ -9,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -21,8 +19,8 @@ public class Turma {
 	
 	private String periodo;
 	
-	@OneToMany
-	private List<Disciplina> disciplina;
+	@OneToOne
+	private Disciplina disciplina;
 	
 	@ManyToOne
 	private Docente docente;
@@ -50,11 +48,11 @@ public class Turma {
 		this.periodo = periodo;
 	}
 
-	public List<Disciplina> getDisciplina() {
+	public Disciplina getDisciplina() {
 		return disciplina;
 	}
 
-	public void setDisciplina(List<Disciplina> disciplina) {
+	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
 
@@ -76,7 +74,7 @@ public class Turma {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(disciplina, docente, periodo);
+		return Objects.hash(disciplina, horario, periodo);
 	}
 
 	@Override
@@ -88,9 +86,10 @@ public class Turma {
 		if (getClass() != obj.getClass())
 			return false;
 		Turma other = (Turma) obj;
-		return Objects.equals(disciplina, other.disciplina) && Objects.equals(docente, other.docente)
+		return Objects.equals(disciplina, other.disciplina) && Objects.equals(horario, other.horario)
 				&& Objects.equals(periodo, other.periodo);
 	}
 
+	
 	
 }

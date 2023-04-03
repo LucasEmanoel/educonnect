@@ -15,8 +15,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
-          memory: 100M
+          cpus: "0.2"
+          memory: 300M
         #volumes:
         #- db:/var/lib/postgresql/data/
   pgadmin:
@@ -34,8 +34,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.1"
-          memory: 100M
+          cpus: "0.2"
+          memory: 300M
       
   backend:
     image: educonnect
@@ -48,7 +48,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/educonnect
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update	
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create	
       TZ: America/Recife
     ports:
       - "8080:8080"

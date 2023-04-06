@@ -7,17 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.educonnect.negocio.basica.Disciplina;
 import br.com.educonnect.negocio.basica.Docente;
-import br.com.educonnect.negocio.basica.Turma;
-import br.com.educonnect.negocio.cadastro.DisciplinaNaoExisteException;
 import br.com.educonnect.negocio.cadastro.DocenteNaoExisteException;
-import br.com.educonnect.negocio.cadastro.TurmaNaoExisteException;
 import br.com.educonnect.negocio.fachada.Fachada;
 
 @RestController
@@ -37,8 +34,14 @@ public class DocenteController {
 	}
 	
 	@GetMapping(value = "/docente/{id}")
-	public ResponseEntity<Docente> encontrarDocente(@PathVariable("id") long id) throws DocenteNaoExisteException {
-		return ResponseEntity.ok(this.fachada.procurarDocenteId(id));
+	public ResponseEntity<Docente> encontrarDocente(@PathVariable("id") long id) {
+		try {
+			return ResponseEntity.ok(this.fachada.procurarDocenteId(id));
+		} catch (DocenteNaoExisteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity<Docente> (HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@GetMapping(value = "/docentes")
@@ -46,28 +49,16 @@ public class DocenteController {
 		return ResponseEntity.ok(fachada.listarDocentes());
 	}
 	
-	@PostMapping(value = "/docente/{idDocente}/turma/{idD}")
-	public ResponseEntity<Object> ofertarDisciplina(@RequestBody Turma t, @PathVariable("idDocente") long idDocente, @PathVariable("idD") long idD) throws DisciplinaNaoExisteException, DocenteNaoExisteException{
-		return ResponseEntity.ok(this.fachada.ofertarDisciplina(idDocente, t, idD));
-	}
-	
-	@DeleteMapping(value = "/docente/{idDocente}/turma/{idT}")
-	public ResponseEntity<Object> deletarTurmaDocente(@PathVariable("idDocente") long idDocente, @PathVariable("idT") long idT){
-		
+	@PatchMapping(value = "/docente/{id}")
+	public ResponseEntity<Docente> atualizarDocente(@RequestBody Docente doc, @PathVariable long docenteId){
 		try {
-			this.fachada.deletarTurmaPorDocente(idDocente, idT);
-			return ResponseEntity.ok("deletado com sucesso");
-		} catch (DocenteNaoExisteException | TurmaNaoExisteException e) {
+			return ResponseEntity.ok(fachada.atualizarDocente(doc, docenteId));
+		} catch (DocenteNaoExisteException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new ResponseEntity<Object> (HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Docente> (HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	@GetMapping(value = "/docente/{idDocente}/turmas")
-	public ResponseEntity<List<Turma>> listarTurmasDocente(@PathVariable("idDocente") long idDocente){
-		return ResponseEntity.ok(this.fachada.listarTurmasPorDocenteId(idDocente));
-	}
-
 }
 	
 

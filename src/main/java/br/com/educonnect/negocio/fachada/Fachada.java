@@ -157,16 +157,21 @@ public class Fachada {
 	}	
 	
 	//quero jogar uma exception aqui para nao ter duas turmas iguais do mesmo docente.
-	public Object ofertarDisciplina(long IDdocente, Turma t, long IDdisc) throws DisciplinaNaoExisteException, DocenteNaoExisteException {
-		//exceptions de existir
+	public Object ofertarDisciplina(long IDdocente, Turma t, long IDdisc) throws DisciplinaNaoExisteException, DocenteNaoExisteException, TurmaIgualException {
 		Docente doc = this.cadastroDocente.procurarDocenteId(IDdocente);
 		Disciplina disc = this.cadastroDisciplina.procurarDisciplinaId(IDdisc);
 		
 		if(doc != null && disc != null) {
 			t.setDocente(doc);
 			t.setDisciplina(disc);
-	
-			return this.cadastroTurma.salvarTurma(t);
+			
+			List<Turma> turmas = this.cadastroTurma.listarTurmasDocente(IDdocente);
+			if(!turmas.contains(t)) {
+				return this.cadastroTurma.salvarTurma(t);
+			}else {
+				throw new TurmaIgualException(disc);
+			}
+			
 		}
 		//vou jogar exception aqui
 		return null;
@@ -202,6 +207,21 @@ public class Fachada {
 	public List<Turma> listarTurmasPorDocenteId(long idDocente) {
 		List<Turma> turmas = this.cadastroTurma.listarTurmasDocente(idDocente);
 		return turmas;
+	}
+	public Disciplina atualizarDisciplina(Disciplina d, long disciplinaId) throws DisciplinaNaoExisteException {
+		Disciplina disciplina = this.cadastroDisciplina.procurarDisciplinaId(disciplinaId);
+		return this.cadastroDisciplina.salvarDisciplina(disciplina);
+	}
+	
+	public Discente atualizarDiscente(Discente dis, long discenteId) throws DiscenteNaoExisteException {
+		Discente discente = this.cadastroDiscente.procurarDiscenteId(discenteId);
+		
+		return this.cadastroDiscente.salvarDiscenteSemException(discente);
+	}
+	public Docente atualizarDocente(Docente doc, long docenteId) throws DocenteNaoExisteException {
+		Docente docente = this.cadastroDocente.procurarDocenteId(docenteId);
+		
+		return this.cadastroDocente.salvarDocente(docente);
 	}
 	
 	

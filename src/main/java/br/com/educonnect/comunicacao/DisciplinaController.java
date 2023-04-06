@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,5 +50,16 @@ public class DisciplinaController {
 		return ResponseEntity.ok(fachada.listDisciplinas());
 	}
 	
+	@PatchMapping(value = "/disciplina/{id}")
+	public ResponseEntity<Disciplina> atualizarDisciplina(@RequestBody Disciplina c, @PathVariable long disciplinaId){
+		try {
+			return ResponseEntity.ok(fachada.atualizarDisciplina(c, disciplinaId));
+		} catch (DisciplinaNaoExisteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity<Disciplina> (HttpStatus.BAD_REQUEST);
+		}
+		
+	}
 	
 }

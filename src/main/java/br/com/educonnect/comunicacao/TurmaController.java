@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.educonnect.negocio.basica.Turma;
 import br.com.educonnect.negocio.cadastro.DisciplinaNaoExisteException;
 import br.com.educonnect.negocio.cadastro.DocenteNaoExisteException;
-import br.com.educonnect.negocio.cadastro.TurmaNaoExisteException;
 import br.com.educonnect.negocio.fachada.Fachada;
 import br.com.educonnect.negocio.fachada.TurmaIgualException;
+import br.com.educonnect.negocio.fachada.TurmaNaoExisteException;
 
 @RestController
 public class TurmaController {

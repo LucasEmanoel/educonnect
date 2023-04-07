@@ -20,9 +20,9 @@ import br.com.educonnect.negocio.basica.Turma;
 import br.com.educonnect.negocio.cadastro.DiscenteEmailIgualException;
 import br.com.educonnect.negocio.cadastro.DiscenteNaoExisteException;
 import br.com.educonnect.negocio.cadastro.DisciplinaNaoExisteException;
-import br.com.educonnect.negocio.cadastro.TurmaNaoExisteException;
 import br.com.educonnect.negocio.fachada.Fachada;
 import br.com.educonnect.negocio.fachada.MatriculaIgualException;
+import br.com.educonnect.negocio.fachada.TurmaNaoExisteException;
 
 @RestController
 public class DiscenteController {

@@ -172,7 +172,6 @@ public class Fachada {
 			}
 			
 		}
-		//vou jogar exception aqui
 		return null;
 	}
 	
@@ -209,18 +208,22 @@ public class Fachada {
 	}
 	public Disciplina atualizarDisciplina(Disciplina d, long disciplinaId) throws DisciplinaNaoExisteException {
 		Disciplina disciplina = this.cadastroDisciplina.procurarDisciplinaId(disciplinaId);
-		return this.cadastroDisciplina.salvarDisciplina(disciplina);
+		d.setId(disciplina.getId());
+		
+		return this.cadastroDisciplina.salvarDisciplina(d);
 	}
 	
 	public Discente atualizarDiscente(Discente dis, long discenteId) throws DiscenteNaoExisteException {
 		Discente discente = this.cadastroDiscente.procurarDiscenteId(discenteId);
+		dis.setId(discente.getId());
 		
-		return this.cadastroDiscente.salvarDiscenteSemException(discente);
+		return this.cadastroDiscente.salvarDiscenteSemException(dis);
 	}
 	public Docente atualizarDocente(Docente doc, long docenteId) throws DocenteNaoExisteException {
 		Docente docente = this.cadastroDocente.procurarDocenteId(docenteId);
+		doc.setId(docente.getId());
 		
-		return this.cadastroDocente.salvarDocente(docente);
+		return this.cadastroDocente.salvarDocente(doc);
 	}
 	
 	

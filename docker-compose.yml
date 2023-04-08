@@ -19,23 +19,23 @@ services:
           memory: 300M
         #volumes:
         #- db:/var/lib/postgresql/data/
-  pgadmin:
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-        PGADMIN_DEFAULT_EMAIL: lucas2014.barros@gmail.com
-        PGADMIN_DEFAULT_PASSWORD: admin#2023%^A
-    ports:
-      - "5050:80"
-    depends_on:
-      - database
-    networks:
-      - poo-network
-    deploy:
-      resources:
-        limits:
-          cpus: "0.2"
-          memory: 300M
+  #pgadmin:
+  #  image: dpage/pgadmin4
+  #  restart: always
+  #  environment:
+  #      PGADMIN_DEFAULT_EMAIL: lucas2014.barros@gmail.com
+  #      PGADMIN_DEFAULT_PASSWORD: admin#2023%^A
+  #  ports:
+  #    - "5050:80"
+  #  depends_on:
+  #    - database
+  #  networks:
+  #    - poo-network
+  #  deploy:
+  #    resources:
+  #      limits:
+  #        cpus: "0.2"
+  #        memory: 300M
       
   backend:
     image: educonnect
@@ -59,10 +59,30 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.3"
+          cpus: "0.2"
           memory: 300M
+  #frontend:
+  #  depends_on:
+  #    - backend
+  #    - database
+  #  image: nuxt-web
+  #  restart: always
+  #  build:
+  #    context: /home/lucas/projects/web-educonnect/
+  #    dockerfile: /home/lucas/projects/web-educonnect/Dockerfile
+  #  working_dir: /app
+  #  ports:
+  #    - "3000:3000"
+  #    - "24678:24678"
+  #  deploy:
+  #    resources:
+  #      limits:
+  #        cpus: "0.5"
+  #        memory: 500M
+  #  networks:
+  #    - frontback
 networks:
   poo-network:
-
+    driver: bridge
 volumes:
-  db: 
+  db:

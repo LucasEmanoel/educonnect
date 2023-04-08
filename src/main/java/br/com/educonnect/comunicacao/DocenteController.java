@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -17,6 +18,7 @@ import br.com.educonnect.negocio.basica.Docente;
 import br.com.educonnect.negocio.cadastro.DocenteNaoExisteException;
 import br.com.educonnect.negocio.fachada.Fachada;
 
+@CrossOrigin(origins= "http://localhost:3000/")
 @RestController
 public class DocenteController {
 	@Autowired
@@ -49,7 +51,7 @@ public class DocenteController {
 		return ResponseEntity.ok(fachada.listarDocentes());
 	}
 	
-	@PatchMapping(value = "/docente/{id}")
+	@PatchMapping(value = "/docente/{docenteId}")
 	public ResponseEntity<Docente> atualizarDocente(@RequestBody Docente doc, @PathVariable long docenteId){
 		try {
 			return ResponseEntity.ok(fachada.atualizarDocente(doc, docenteId));

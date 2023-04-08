@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -24,6 +25,8 @@ import br.com.educonnect.negocio.cadastro.TurmaNaoExisteException;
 import br.com.educonnect.negocio.fachada.Fachada;
 import br.com.educonnect.negocio.fachada.MatriculaIgualException;
 
+
+@CrossOrigin (origins = "http://localhost:3000/")
 @RestController
 public class DiscenteController {
 	@Autowired
@@ -60,7 +63,8 @@ public class DiscenteController {
 		return ResponseEntity.ok(fachada.listarDiscentes());
 	}
 	
-	@PatchMapping(value = "/discente/{id}")
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PatchMapping(value = "/discente/{discenteId}")
 	public ResponseEntity<Discente> atualizarDiscente(@RequestBody Discente dis, @PathVariable long discenteId){
 		try {
 			return ResponseEntity.ok(fachada.atualizarDiscente(dis, discenteId));

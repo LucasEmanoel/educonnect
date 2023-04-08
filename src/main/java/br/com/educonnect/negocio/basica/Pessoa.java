@@ -53,9 +53,6 @@ public abstract class Pessoa {
 	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getNome() {
 		return nome;
 	}
@@ -96,4 +93,8 @@ public abstract class Pessoa {
 		this.endereco = endereco;
 	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 }

@@ -50,8 +50,8 @@ public class DisciplinaController {
 		return ResponseEntity.ok(fachada.listDisciplinas());
 	}
 	
-	@PatchMapping(value = "/disciplina/{id}")
-	public ResponseEntity<Disciplina> atualizarDisciplina(@RequestBody Disciplina c, @PathVariable long disciplinaId){
+	@PatchMapping(value = "/disciplina/{disciplinaId}")
+	public ResponseEntity<Disciplina> atualizarDisciplina(@PathVariable long disciplinaId, @RequestBody Disciplina c ){
 		try {
 			return ResponseEntity.ok(fachada.atualizarDisciplina(c, disciplinaId));
 		} catch (DisciplinaNaoExisteException e) {

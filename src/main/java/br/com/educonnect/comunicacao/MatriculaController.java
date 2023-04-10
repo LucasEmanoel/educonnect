@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.educonnect.negocio.basica.Matricula;
 import br.com.educonnect.negocio.cadastro.DiscenteNaoExisteException;
+import br.com.educonnect.negocio.cadastro.TurmaNaoExisteException;
 import br.com.educonnect.negocio.fachada.Fachada;
 import br.com.educonnect.negocio.fachada.MatriculaIgualException;
-import br.com.educonnect.negocio.fachada.TurmaNaoExisteException;
 
 @CrossOrigin(origins = "http://localhost:3000/")
 @RestController

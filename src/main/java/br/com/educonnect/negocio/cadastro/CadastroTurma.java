@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.educonnect.dados.RepositorioTurma;
 import br.com.educonnect.negocio.basica.Turma;
-import br.com.educonnect.negocio.fachada.TurmaNaoExisteException;
 
 
 @Service

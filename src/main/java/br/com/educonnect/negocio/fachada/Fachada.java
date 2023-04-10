@@ -6,31 +6,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.educonnect.negocio.basica.Campus;
-import br.com.educonnect.negocio.basica.Curso;
 import br.com.educonnect.negocio.basica.Discente;
 import br.com.educonnect.negocio.basica.Disciplina;
 import br.com.educonnect.negocio.basica.Docente;
-import br.com.educonnect.negocio.basica.Ementa;
 import br.com.educonnect.negocio.basica.Turma;
-import br.com.educonnect.negocio.basica.Universidade;
 import br.com.educonnect.negocio.basica.Matricula;
-import br.com.educonnect.negocio.cadastro.UniversidadeJaExisteException;
-import br.com.educonnect.negocio.cadastro.CampusNaoEncontradoException;
-import br.com.educonnect.negocio.cadastro.CursoNaoExisteException;
 import br.com.educonnect.negocio.cadastro.DiscenteEmailIgualException;
 import br.com.educonnect.negocio.cadastro.DiscenteNaoExisteException;
 import br.com.educonnect.negocio.cadastro.DisciplinaNaoExisteException;
 import br.com.educonnect.negocio.cadastro.DocenteNaoExisteException;
-import br.com.educonnect.negocio.cadastro.EmentaNaoExisteException;
-import br.com.educonnect.negocio.cadastro.ICadastroCampus;
-import br.com.educonnect.negocio.cadastro.ICadastroCurso;
 import br.com.educonnect.negocio.cadastro.ICadastroDiscente;
 import br.com.educonnect.negocio.cadastro.ICadastroDisciplina;
 import br.com.educonnect.negocio.cadastro.ICadastroDocente;
-import br.com.educonnect.negocio.cadastro.ICadastroEmenta;
 import br.com.educonnect.negocio.cadastro.ICadastroTurma;
-import br.com.educonnect.negocio.cadastro.ICadastroUniversidade;
+import br.com.educonnect.negocio.cadastro.TurmaNaoExisteException;
 import br.com.educonnect.negocio.cadastro.ICadastroMatricula;
 
 @Service
@@ -45,14 +34,6 @@ public class Fachada {
 	private ICadastroDocente cadastroDocente;
 	@Autowired
 	private ICadastroTurma cadastroTurma;
-	@Autowired
-	private ICadastroCurso cadastroCurso;
-	@Autowired
-	private ICadastroUniversidade cadastroUniversidade;
-	@Autowired
-	private ICadastroCampus cadastroCampus;
-	@Autowired
-	private ICadastroEmenta cadastroEmenta;
 	
 	//MATRICULA
 	
@@ -71,97 +52,6 @@ public class Fachada {
 	public void deletarMatricula(Matricula matricula) {
 		this.cadastroMatricula.deletarMatricula(matricula);
 	}
-	
-	//UNIVERSIDADE
-	public Universidade cadastrarUniversidade(Universidade uni) throws UniversidadeJaExisteException {
-		return this.cadastroUniversidade.cadastrarUniversidade(uni);
-	}
-
-	public Universidade getUniversidade() {
-	     return this.cadastroUniversidade.getUniversidade();
-	}
-
-	public void setUniversidade(Universidade uni) {
-	     this.cadastroUniversidade.setUniversidade(uni);
-	}
-    public Universidade salvarUniversidade(Universidade universidade) throws UniversidadeJaExisteException {
-        return this.cadastroUniversidade.cadastrarUniversidade(universidade);
-    }
-
-    public Universidade procurarUniversidade() {
-        return this.cadastroUniversidade.getUniversidade();
-    }
-    
-    //CAMPUS
-    public Campus salvarCampus(Campus campus) {
-        return cadastroCampus.salvarCampus(campus);
-    }
-
-    public void deletarCampus(long id) throws CampusNaoEncontradoException {
-        cadastroCampus.deletarCampusPorId(id);
-    }
-
-    public Campus encontrarCampusId(long id) throws CampusNaoEncontradoException {
-        return cadastroCampus.encontrarCampusPorId(id);
-    }
-
-    public List<Campus> listarCampi() {
-        return cadastroCampus.listarCampus();
-    }
-
-    public Campus atualizarCampus(Campus campus, long campusId) throws CampusNaoEncontradoException {
-        return cadastroCampus.atualizarCampus(campus, campusId);
-    }
-    
-	
-	//CURSO
-	public Curso salvarCurso(Curso c) {
-	    return this.cadastroCurso.salvarCurso(c);
-	}
-
-	public List<Curso> listarCursos() {
-	    return this.cadastroCurso.listarCursos();
-	}
-	public Curso atualizarCurso(Curso c, long cursoId) throws CursoNaoExisteException {
-	    return this.cadastroCurso.atualizarCurso(c, 0);
-	}
-
-	public void deletarCurso(long id) {
-	    this.cadastroCurso.deletarCursoId(id);
-	}
-
-	public Curso encontrarCursoId(long id) throws CursoNaoExisteException {
-	    return this.cadastroCurso.encontrarCursoId(id);
-	}
-	
-	//EMENTA
-	public Ementa salvarEmenta(Ementa ementa, long disciplinaId) throws DisciplinaNaoExisteException {
-		Disciplina disciplina = cadastroDisciplina.procurarDisciplinaId(disciplinaId);
-		ementa.setDisciplina(disciplina);
-		return cadastroEmenta.salvarEmenta(ementa);
-	}
-
-	public void deletarEmenta(long id) {
-		cadastroEmenta.deletarEmentaId(id);
-	}
-
-	public Ementa encontrarEmentaId(long id) throws EmentaNaoExisteException {
-		return cadastroEmenta.procurarEmentaId(id);
-	}
-
-	public List<Ementa> listEmentas() {
-		return cadastroEmenta.listarEmentas();
-	}
-
-	public Ementa atualizarEmenta(Ementa ementa, long ementaId, long disciplinaId)
-			throws EmentaNaoExisteException, DisciplinaNaoExisteException {
-		Ementa ementaEncontrada = cadastroEmenta.procurarEmentaId(ementaId);
-		Disciplina disciplina = cadastroDisciplina.procurarDisciplinaId(disciplinaId);
-		ementaEncontrada.setDescricao(ementa.getDescricao());
-		ementaEncontrada.setDisciplina(disciplina);
-		return cadastroEmenta.salvarEmenta(ementaEncontrada);
-	}
-
 	
 	//DISCIPLINA
 	
@@ -335,7 +225,6 @@ public class Fachada {
 		
 		return this.cadastroDocente.salvarDocente(doc);
 	}
-
 	
 	
 }

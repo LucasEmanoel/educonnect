@@ -1,17 +1,12 @@
 package br.com.educonnect.negocio.basica;
 
-<<<<<<< HEAD
 
-import java.sql.Time;
 import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Horario {
@@ -20,43 +15,27 @@ public class Horario {
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;
 	
-	@JsonFormat(pattern="HH:mm")
-	private Time horario;
+	private String horario;
 	
-	@OneToOne(mappedBy = "horario")
-	private Disciplina disciplina;
 	
 	public Horario() {
 		super();
 	}
-	
-	public Horario(Time horario) {
+	public Horario(String horario) {
 		super();
 		this.horario = horario;
 	}
-	
 	public long getId() {
 		return id;
 	}
-	
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	public Time getHorario() {
+	public String getHorario() {
 		return horario;
 	}
-	
-	public void setHorario(Time horario) {
+	public void setHorario(String horario) {
 		this.horario = horario;
-	}
-	
-	public Disciplina getDisciplina() {
-		return disciplina;
-	}
-	
-	public void setDisciplina(Disciplina disciplina) {
-		this.disciplina = disciplina;
 	}
 	
 	@Override
@@ -77,37 +56,4 @@ public class Horario {
 	}
 	
 	
-=======
-import java.sql.Time;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class Horario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private Time horario;
-
-    public Horario() {
-    }
-
-    public void setHorario(Time horario) {
-        this.horario = horario;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Time getHorario() {
-        return horario;
-    }
->>>>>>> d86ecae9faef454e508f6803bbc2f906719672b2
 }

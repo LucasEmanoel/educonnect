@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -18,6 +19,9 @@ public class Docente extends Pessoa{
 	
 	@OneToMany(mappedBy = "docente", cascade = CascadeType.DETACH)
 	private List<Turma> turmas;
+	
+	@ManyToMany
+	private List<Disciplina> disciplina;
 	
 	public Docente() {
 		super();

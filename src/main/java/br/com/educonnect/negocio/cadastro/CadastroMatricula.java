@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.educonnect.dados.RepositorioMatricula;
-import br.com.educonnect.negocio.basica.Discente;
 import br.com.educonnect.negocio.basica.Matricula;
 
 

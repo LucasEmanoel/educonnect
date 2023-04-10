@@ -2,7 +2,6 @@ package br.com.educonnect.negocio.basica;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +15,7 @@ public class Discente extends Pessoa{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	private List<Matricula> matriculas;
 	
 	

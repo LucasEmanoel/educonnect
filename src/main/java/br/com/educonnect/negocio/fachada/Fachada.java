@@ -92,35 +92,33 @@ public class Fachada {
 		//exceção discente nao existe
 		Discente dis = this.cadastroDiscente.procurarDiscenteId(idD);
 		Turma turma = this.cadastroTurma.procurarTurmaId(idT);
-		//ver se o discente ja tem essa matricula criada		
 		
+		if (dis.getMatriculas() == null) {
+			dis.setMatriculas(new ArrayList<Matricula>());
+		}
 		
-		if (dis.getMatriculas() != null) {
-		    if (!dis.getMatriculas().contains(mat)) {
-		        dis.getMatriculas().add(mat);
-		        mat.setTurma(turma);
-		        cadastroMatricula.salvarMatricula(mat);
-		        cadastroDiscente.salvarDiscenteSemException(dis);
-		    } else {
-		        throw new MatriculaIgualException(turma);
-		    }
-		} else {
-		    dis.setMatriculas(new ArrayList<Matricula>());
+		if (!dis.getMatriculas().contains(mat)) {
 		    dis.getMatriculas().add(mat);
 		    mat.setTurma(turma);
 		    cadastroMatricula.salvarMatricula(mat);
+		    cadastroTurma.salvarTurma(turma);
+		    
 		    cadastroDiscente.salvarDiscenteSemException(dis);
+		} else {
+		        throw new MatriculaIgualException(turma);
 		}
 
 		return mat;	
 	}
 	
-	public Matricula deletarMatriculaDiscente(long idMat, long idDiscente) throws DiscenteNaoExisteException {
+	public Matricula deletarMatriculaDiscente(long idDiscente, long idMat) throws DiscenteNaoExisteException {
 		Discente dis = this.cadastroDiscente.procurarDiscenteId(idDiscente);
 		Matricula mat = this.cadastroMatricula.procurarMatriculaId(idMat);
 		
 		dis.getMatriculas().remove(mat);
+		
 		cadastroDiscente.salvarDiscenteSemException(dis);
+		
 		cadastroMatricula.deletarMatriculaId(mat.getId());
 		return mat;
 	}

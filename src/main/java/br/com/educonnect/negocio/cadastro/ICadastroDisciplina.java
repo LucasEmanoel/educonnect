@@ -3,9 +3,9 @@ package br.com.educonnect.negocio.cadastro;
 import java.util.List;
 
 import br.com.educonnect.negocio.basica.Disciplina;
+import br.com.educonnect.negocio.basica.Matricula;
 
 public interface ICadastroDisciplina {
-	Disciplina cadastrarDisciplina(long id, String nome);
 	Disciplina procurarDisciplinaId(long id) throws DisciplinaNaoExisteException;
 
 	List<Disciplina> listarDisciplinas();
@@ -15,6 +15,4 @@ public interface ICadastroDisciplina {
 	Disciplina salvarDisciplina(Disciplina disciplina);
 
 	void deletarDisciplina(Disciplina disciplina);
-
-	Disciplina cadastrarDisciplina(Disciplina disciplina) throws HorarioIndisponivelException;
 }

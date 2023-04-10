@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -21,6 +22,7 @@ public class Matricula {
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
 	
+	//nao deletar disciplina com cascade
 	@OneToOne
 	private Turma turma;
 	

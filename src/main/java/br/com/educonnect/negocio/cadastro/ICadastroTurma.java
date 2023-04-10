@@ -3,7 +3,6 @@ package br.com.educonnect.negocio.cadastro;
 import java.util.List;
 
 import br.com.educonnect.negocio.basica.Turma;
-import br.com.educonnect.negocio.fachada.TurmaNaoExisteException;
 
 public interface ICadastroTurma {
 	

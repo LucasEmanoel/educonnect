@@ -1,4 +1,4 @@
-package br.com.educonnect.negocio.fachada;
+package br.com.educonnect.negocio.cadastro;
 
 public class TurmaNaoExisteException extends Exception {
 

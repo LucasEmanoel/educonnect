@@ -10,50 +10,43 @@ import br.com.educonnect.negocio.basica.Disciplina;
 
 
 @Service
-public abstract class CadastroDisciplina implements ICadastroDisciplina {
+public class CadastroDisciplina implements ICadastroDisciplina{
 
 	@Autowired
 	private RepositorioDisciplina repoDis;
-
-	@Override
-	public Disciplina cadastrarDisciplina(Disciplina disciplina) throws HorarioIndisponivelException {
-		List<Disciplina> disciplinas = repoDis.findByHorario(disciplina.getHorario());
-		if (!disciplinas.isEmpty()) {
-			throw new HorarioIndisponivelException();
-		}
-		return repoDis.save(disciplina);
-	}
-
+	
 	@Override
 	public Disciplina procurarDisciplinaId(long id) throws DisciplinaNaoExisteException {
 		Disciplina dis = repoDis.findById(id).orElse(null);
-		if (dis != null) {
+		if(dis != null) {
 			return dis;
-		} else {
+		}else {
 			throw new DisciplinaNaoExisteException();
 		}
 	}
 
 	@Override
 	public List<Disciplina> listarDisciplinas() {
+		// TODO Auto-generated method stub
 		return repoDis.findAll();
 	}
 
 	@Override
 	public void deletarDisciplinaId(Long id) {
 		repoDis.deleteById(id);
-
+		
 	}
 
 	@Override
 	public Disciplina salvarDisciplina(Disciplina disciplina) {
+		// TODO Auto-generated method stub
 		return repoDis.save(disciplina);
 	}
 
 	@Override
 	public void deletarDisciplina(Disciplina disciplina) {
 		repoDis.delete(disciplina);
-
+		
 	}
 
 }

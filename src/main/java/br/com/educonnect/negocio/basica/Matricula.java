@@ -9,32 +9,31 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
 public class Matricula {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@JsonFormat(pattern="dd/MM/yyyy")
+
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date data;
-	
-	//nao deletar disciplina com cascade
+
+	// nao deletar disciplina com cascade
 	@OneToOne
 	private Turma turma;
-	
+
 	public Matricula() {
 		super();
 	}
-	
+
 	public Matricula(Date data, Turma turma) {
 		super();
 		this.data = data;
 		this.turma = turma;
-	}	
+	}
 
 	public Matricula(Turma turma) {
 		super();
@@ -44,12 +43,15 @@ public class Matricula {
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public Date getData() {
 		return data;
 	}
+
 	public void setData(Date data) {
 		this.data = data;
 	}
@@ -78,6 +80,5 @@ public class Matricula {
 		Matricula other = (Matricula) obj;
 		return Objects.equals(turma, other.turma);
 	}
-	
-	
+
 }

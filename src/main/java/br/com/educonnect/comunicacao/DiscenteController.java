@@ -15,18 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.educonnect.negocio.basica.Discente;
-import br.com.educonnect.negocio.basica.Disciplina;
-import br.com.educonnect.negocio.basica.Matricula;
-import br.com.educonnect.negocio.basica.Turma;
 import br.com.educonnect.negocio.cadastro.DiscenteEmailIgualException;
 import br.com.educonnect.negocio.cadastro.DiscenteNaoExisteException;
-import br.com.educonnect.negocio.cadastro.DisciplinaNaoExisteException;
-import br.com.educonnect.negocio.cadastro.TurmaNaoExisteException;
 import br.com.educonnect.negocio.fachada.Fachada;
-import br.com.educonnect.negocio.fachada.MatriculaIgualException;
 
-
-@CrossOrigin (origins = "http://localhost:3000/")
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 public class DiscenteController {
 	@Autowired
@@ -39,7 +32,7 @@ public class DiscenteController {
 		} catch (DiscenteEmailIgualException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new ResponseEntity<Discente> (HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Discente>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -48,31 +41,31 @@ public class DiscenteController {
 		this.fachada.deletarDiscenteId(id);
 		return ResponseEntity.ok("deletado com sucesso");
 	}
-	
+
 	@GetMapping(value = "/discente/{id}")
 	public ResponseEntity<Discente> encontrarDiscente(@PathVariable("id") long id) {
 		try {
 			return ResponseEntity.ok(this.fachada.procurarDiscenteId(id));
 		} catch (DiscenteNaoExisteException e) {
-			return new ResponseEntity<Discente> (HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Discente>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@GetMapping(value = "/discentes")
-	public ResponseEntity<List<Discente>> listDiscentes(){
+	public ResponseEntity<List<Discente>> listDiscentes() {
 		return ResponseEntity.ok(fachada.listarDiscentes());
 	}
-	
+
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PatchMapping(value = "/discente/{discenteId}")
-	public ResponseEntity<Discente> atualizarDiscente(@RequestBody Discente dis, @PathVariable long discenteId){
+	public ResponseEntity<Discente> atualizarDiscente(@RequestBody Discente dis, @PathVariable long discenteId) {
 		try {
 			return ResponseEntity.ok(fachada.atualizarDiscente(dis, discenteId));
 		} catch (DiscenteNaoExisteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new ResponseEntity<Discente> (HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Discente>(HttpStatus.BAD_REQUEST);
 		}
-		
+
 	}
 }

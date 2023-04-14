@@ -139,7 +139,7 @@ public class Fachada {
 	// EMENTA
 	public Ementa salvarEmenta(Ementa ementa, long disciplinaId) throws DisciplinaNaoExisteException {
 		Disciplina disciplina = cadastroDisciplina.procurarDisciplinaId(disciplinaId);
-		ementa.setDisciplina(disciplina);
+		//ementa.setDisciplina(disciplina);
 		return cadastroEmenta.salvarEmenta(ementa);
 	}
 
@@ -160,7 +160,7 @@ public class Fachada {
 		Ementa ementaEncontrada = cadastroEmenta.procurarEmentaId(ementaId);
 		Disciplina disciplina = cadastroDisciplina.procurarDisciplinaId(disciplinaId);
 		ementaEncontrada.setDescricao(ementa.getDescricao());
-		ementaEncontrada.setDisciplina(disciplina);
+		//ementaEncontrada.setDisciplina(disciplina);
 		return cadastroEmenta.salvarEmenta(ementaEncontrada);
 	}
 

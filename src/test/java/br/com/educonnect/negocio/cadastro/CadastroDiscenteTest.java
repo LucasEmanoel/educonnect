@@ -15,8 +15,8 @@ class CadastroDiscenteTest {
 	
 	@Autowired
 	private Fachada fachada;
-	
-	/*@Test
+
+	@Test
 	void cadastrarDoisDiscentesComMesmoEmail() {
 		Discente d1 = new Discente();
 		Discente d2 = new Discente();
@@ -32,5 +32,5 @@ class CadastroDiscenteTest {
 		}
 		
 		
-	}*/
+	}
 }

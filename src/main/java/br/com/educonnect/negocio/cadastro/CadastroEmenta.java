@@ -16,7 +16,7 @@ public class CadastroEmenta implements ICadastroEmenta {
     private RepositorioEmenta repoEmenta;
 
     public Ementa cadastrarEmenta(Ementa ementa, Disciplina disciplina) {
-        ementa.setDisciplina(disciplina);
+        //ementa.setDisciplina(disciplina);
         return repoEmenta.save(ementa);
     }
 

@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Ementa {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

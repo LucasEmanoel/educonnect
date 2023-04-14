@@ -2,6 +2,7 @@ package br.com.educonnect.negocio.basica;
 
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +18,7 @@ public class Disciplina {
 	
 	private String disciplina;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Ementa ementa;
 	
 	public Disciplina() {

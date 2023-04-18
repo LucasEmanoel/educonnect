@@ -13,7 +13,7 @@ import br.com.educonnect.negocio.fachada.Fachada;
 @SpringBootTest
 class CadastroDiscenteTest {
 	
-	/*@Autowired
+	@Autowired
 	private Fachada fachada;
 
 	@Test
@@ -21,16 +21,17 @@ class CadastroDiscenteTest {
 		Discente d1 = new Discente();
 		Discente d2 = new Discente();
 		d1.setEmail("lucas@gmail.com");
+		d2.setEmail("lucas@gmail.com");
 		
 		try {
 			fachada.salvarDiscente(d1);
 			fachada.salvarDiscente(d2);
 			fail("Nao pode salvar duas contas com emails iguais.");
-		} catch (Exception e) {
+		} catch (DiscenteEmailIgualException e) {
 			e.printStackTrace();
 			assertTrue(true, "Ok");
 		}
 		
 		
-	}*/
+	}
 }

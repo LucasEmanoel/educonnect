@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.educonnect.dados.RepositorioDiscente;
 import br.com.educonnect.negocio.basica.Discente;
+import br.com.educonnect.negocio.basica.Pessoa;
 
 @Service
 public class CadastroDiscente implements ICadastroDiscente {
@@ -75,6 +76,12 @@ public class CadastroDiscente implements ICadastroDiscente {
 		}else {
 			throw new DiscenteNaoExisteException();
 		}
+	}
+
+	@Override
+	public List<String> listarDiscentesPorIdTurma(long id) {
+		List<String> discentes = this.repositorioDiscente.findNomeByTurmaId(id);
+		return  discentes;
 	}
 
 

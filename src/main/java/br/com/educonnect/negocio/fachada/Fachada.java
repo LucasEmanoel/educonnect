@@ -15,6 +15,7 @@ import br.com.educonnect.negocio.basica.Ementa;
 import br.com.educonnect.negocio.basica.Turma;
 import br.com.educonnect.negocio.basica.Universidade;
 import br.com.educonnect.negocio.basica.Matricula;
+import br.com.educonnect.negocio.basica.Pessoa;
 import br.com.educonnect.negocio.cadastro.UniversidadeJaExisteException;
 import br.com.educonnect.negocio.cadastro.UniversidadeNaoExisteException;
 import br.com.educonnect.negocio.cadastro.CampusNaoEncontradoException;
@@ -107,6 +108,7 @@ public class Fachada {
 		this.setUniversidade(uni);
 	}
 
+
 	public void removerUniversidade(Long id) {
 		this.removerUniversidade(id);
 	}
@@ -156,7 +158,7 @@ public class Fachada {
 	// EMENTA
 	public Ementa salvarEmenta(Ementa ementa, long disciplinaId) throws DisciplinaNaoExisteException {
 		Disciplina disciplina = cadastroDisciplina.procurarDisciplinaId(disciplinaId);
-		ementa.setDisciplina(disciplina);
+		//ementa.setDisciplina(disciplina);
 		return cadastroEmenta.salvarEmenta(ementa);
 	}
 
@@ -177,7 +179,7 @@ public class Fachada {
 		Ementa ementaEncontrada = cadastroEmenta.procurarEmentaId(ementaId);
 		Disciplina disciplina = cadastroDisciplina.procurarDisciplinaId(disciplinaId);
 		ementaEncontrada.setDescricao(ementa.getDescricao());
-		ementaEncontrada.setDisciplina(disciplina);
+		//ementaEncontrada.setDisciplina(disciplina);
 		return cadastroEmenta.salvarEmenta(ementaEncontrada);
 	}
 
@@ -208,6 +210,10 @@ public class Fachada {
 	public List<Discente> listarDiscentes() {
 		return this.cadastroDiscente.listarDiscentes();
 	}
+	
+	public List<String> listarDiscentesByTurma(long id){
+		return this.cadastroDiscente.listarDiscentesPorIdTurma(id);
+	}
 
 	public void deletarDiscenteId(Long id) {
 		this.cadastroDiscente.deletarDiscenteId(id);
@@ -223,7 +229,6 @@ public class Fachada {
 
 	public Matricula adicionarMatricula(long idD, Matricula mat, long idT)
 			throws DiscenteNaoExisteException, TurmaNaoExisteException, MatriculaIgualException {
-		// exceção discente nao existe
 		Discente dis = this.cadastroDiscente.procurarDiscenteId(idD);
 		Turma turma = this.cadastroTurma.procurarTurmaId(idT);
 		// ver se o discente ja tem essa matricula criada

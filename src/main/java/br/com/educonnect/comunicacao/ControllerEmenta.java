@@ -34,7 +34,8 @@ public class ControllerEmenta {
     public ResponseEntity<Ementa> salvarEmenta(@RequestBody Ementa ementa, @PathVariable long disciplinaId) {
         try {
             Disciplina disciplina = cadastroDisciplina.procurarDisciplinaId(disciplinaId);
-            ementa.setDisciplina(disciplina);
+
+            //ementa.setDisciplina(disciplina);
             return ResponseEntity.ok(cadastroEmenta.salvarEmenta(ementa));
         } catch (DisciplinaNaoExisteException e) {
             e.printStackTrace();

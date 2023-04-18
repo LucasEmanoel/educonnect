@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.educonnect.negocio.basica.Discente;
+import br.com.educonnect.negocio.basica.Pessoa;
 import br.com.educonnect.negocio.cadastro.DiscenteEmailIgualException;
 import br.com.educonnect.negocio.cadastro.DiscenteNaoExisteException;
 import br.com.educonnect.negocio.fachada.Fachada;
@@ -55,8 +56,12 @@ public class DiscenteController {
 	public ResponseEntity<List<Discente>> listDiscentes() {
 		return ResponseEntity.ok(fachada.listarDiscentes());
 	}
-
-	@CrossOrigin(origins = "http://localhost:3000")
+	
+	@GetMapping(value = "/discentes/turma/{idTurma}")
+	public ResponseEntity<List<String>> listDiscentesByTurma(@PathVariable("idTurma") long idTurma) {
+		return ResponseEntity.ok(fachada.listarDiscentesByTurma(idTurma));
+	}
+	
 	@PatchMapping(value = "/discente/{discenteId}")
 	public ResponseEntity<Discente> atualizarDiscente(@RequestBody Discente dis, @PathVariable long discenteId) {
 		try {

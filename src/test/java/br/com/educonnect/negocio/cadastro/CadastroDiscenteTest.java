@@ -13,10 +13,10 @@ import br.com.educonnect.negocio.fachada.Fachada;
 @SpringBootTest
 class CadastroDiscenteTest {
 	
-	@Autowired
+	/*@Autowired
 	private Fachada fachada;
-	
-	/*@Test
+
+	@Test
 	void cadastrarDoisDiscentesComMesmoEmail() {
 		Discente d1 = new Discente();
 		Discente d2 = new Discente();

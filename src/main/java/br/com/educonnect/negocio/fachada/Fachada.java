@@ -17,6 +17,7 @@ import br.com.educonnect.negocio.basica.Universidade;
 import br.com.educonnect.negocio.basica.Matricula;
 import br.com.educonnect.negocio.basica.Pessoa;
 import br.com.educonnect.negocio.cadastro.UniversidadeJaExisteException;
+import br.com.educonnect.negocio.cadastro.UniversidadeNaoExisteException;
 import br.com.educonnect.negocio.cadastro.CampusNaoEncontradoException;
 import br.com.educonnect.negocio.cadastro.CursoNaoExisteException;
 import br.com.educonnect.negocio.cadastro.DiscenteEmailIgualException;
@@ -48,7 +49,7 @@ public class Fachada {
 	@Autowired
 	private ICadastroTurma cadastroTurma;
 	@Autowired
-	private ICadastroUniversidade cadastrarUniversidade;
+	private ICadastroUniversidade cadastroUniversidade;
 	@Autowired
 	private ICadastroCurso cadastroCurso;
 	@Autowired
@@ -79,17 +80,34 @@ public class Fachada {
 	}
 
 	// UNIVERSIDADE
-	public Universidade cadastrarUniversidade(Universidade uni) throws UniversidadeJaExisteException {
-		return this.cadastrarUniversidade(uni);
+	public Universidade salvarUniversidade(Universidade universidade) throws UniversidadeJaExisteException {
+		return cadastroUniversidade.salvarUniversidade(universidade);
 	}
 
 	public Universidade getUniversidade(Long id) {
 		return this.getUniversidade(id);
 	}
 
+	public void deletarUniversidade(long id) {
+		this.cadastroUniversidade.deletarUniversidadeId(id);
+	}
+	
+	public List<Universidade> listarUniversidade() {
+		return this.cadastroUniversidade.listarUniversidade();
+	}
+
+	public Universidade atualizarUniversidade(Universidade uni, long universidadeId) throws UniversidadeNaoExisteException {
+		return this.cadastroUniversidade.atualizarUniversidade(uni, 0);
+	}
+
+	public Universidade encontrarUniversidadeId(long id) throws UniversidadeNaoExisteException {
+		return this.cadastroUniversidade.encontrarUniversidadeId(id);
+	}
+
 	public void setUniversidade(Universidade uni) {
 		this.setUniversidade(uni);
 	}
+
 
 	public void removerUniversidade(Long id) {
 		this.removerUniversidade(id);
@@ -356,4 +374,5 @@ public class Fachada {
 
 		return this.cadastroDocente.salvarDocente(doc);
 	}
+
 }

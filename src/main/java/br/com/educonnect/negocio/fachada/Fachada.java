@@ -15,7 +15,9 @@ import br.com.educonnect.negocio.basica.Ementa;
 import br.com.educonnect.negocio.basica.Turma;
 import br.com.educonnect.negocio.basica.Universidade;
 import br.com.educonnect.negocio.basica.Matricula;
+import br.com.educonnect.negocio.basica.Pessoa;
 import br.com.educonnect.negocio.cadastro.UniversidadeJaExisteException;
+import br.com.educonnect.negocio.cadastro.UniversidadeNaoExisteException;
 import br.com.educonnect.negocio.cadastro.CampusNaoEncontradoException;
 import br.com.educonnect.negocio.cadastro.CursoNaoExisteException;
 import br.com.educonnect.negocio.cadastro.DiscenteEmailIgualException;
@@ -48,6 +50,7 @@ public class Fachada {
 	private ICadastroTurma cadastroTurma;
 	@Autowired
 	private ICadastroUniversidade cadastrarUniversidade;
+
 	@Autowired
 	private ICadastroCurso cadastroCurso;
 	@Autowired
@@ -139,7 +142,7 @@ public class Fachada {
 	// EMENTA
 	public Ementa salvarEmenta(Ementa ementa, long disciplinaId) throws DisciplinaNaoExisteException {
 		Disciplina disciplina = cadastroDisciplina.procurarDisciplinaId(disciplinaId);
-		ementa.setDisciplina(disciplina);
+		//ementa.setDisciplina(disciplina);
 		return cadastroEmenta.salvarEmenta(ementa);
 	}
 
@@ -160,7 +163,7 @@ public class Fachada {
 		Ementa ementaEncontrada = cadastroEmenta.procurarEmentaId(ementaId);
 		Disciplina disciplina = cadastroDisciplina.procurarDisciplinaId(disciplinaId);
 		ementaEncontrada.setDescricao(ementa.getDescricao());
-		ementaEncontrada.setDisciplina(disciplina);
+		//ementaEncontrada.setDisciplina(disciplina);
 		return cadastroEmenta.salvarEmenta(ementaEncontrada);
 	}
 
@@ -191,7 +194,6 @@ public class Fachada {
 	public List<Discente> listarDiscentes() {
 		return this.cadastroDiscente.listarDiscentes();
 	}
-
 	public void deletarDiscenteId(Long id) {
 		this.cadastroDiscente.deletarDiscenteId(id);
 	}
@@ -352,4 +354,5 @@ public class Fachada {
 
 		return this.cadastroDocente.salvarDocente(doc);
 	}
+
 }

@@ -1,5 +1,6 @@
 package br.com.educonnect.negocio.cadastro;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,30 +14,43 @@ public class CadastroUniversidade implements ICadastroUniversidade {
 
 	@Autowired
 	private RepositorioUniversidade repositorioUniversidade;
-
+	
+	public CadastroUniversidade(RepositorioUniversidade repositorioUniversidade) {
+		super();
+		
+		this.repositorioUniversidade = repositorioUniversidade;
+	}
+	
 	@Override
-	public Universidade cadastrarUniversidade(Universidade universidade) throws UniversidadeJaExisteException {
-		Optional<Universidade> uni = this.repositorioUniversidade.findById(null);
-		if (uni != null) {
-			throw new UniversidadeJaExisteException();
-		} else {
-			return this.repositorioUniversidade.save(universidade);
+	public Universidade encontrarUniversidadeId(long id) throws UniversidadeNaoExisteException{
+		Universidade universidade = this.repositorioUniversidade.findById(id).orElse(null);
+		if(universidade != null) {
+			return universidade;
+		}else {
+			throw new UniversidadeNaoExisteException();
 		}
 	}
-
+	
 	@Override
-	public Universidade getUniversidade(Long id) {
-		return this.repositorioUniversidade.findById(id).orElse(null);
-	}
-
+	public List<Universidade> listarUniversidade(){
+		return this.repositorioUniversidade.findAll();
+	} 
+	
 	@Override
-	public void setUniversidade(Universidade universidade) {
-		this.repositorioUniversidade.save(universidade);
-	}
-
-	@Override
-	public void removerUniversidade(Long id) {
+	public void deletarUniversidadeId(long id) {
 		this.repositorioUniversidade.deleteById(id);
+	}
+	
+	@Override
+	public Universidade salvarUniversidade(Universidade universidade) {
+		return this.repositorioUniversidade.save(universidade);
+	}
+	
+	@Override
+	public Universidade atualizarUniversidade(Universidade universidade, long id) throws UniversidadeNaoExisteException{
+		Universidade universidadeAntiga = this.encontrarUniversidadeId(id);
+		universidadeAntiga.setNome(universidade.getNome());
+		return this.repositorioUniversidade.save(universidadeAntiga);
 	}
 
 }

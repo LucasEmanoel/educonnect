@@ -11,6 +11,8 @@ import br.com.educonnect.negocio.basica.Turma;
 
 public interface RepositorioTurma extends JpaRepository<Turma, Long>{
 	//findByDocente_id
+	//native = true opcao 1
+	//inverter mapeamento opcao 2 
 	@Query("select t from Turma t where t.docente.id = :id")
 	public List<Turma> listTurmasByDocenteId(@Param("id") Long idDis);
 }

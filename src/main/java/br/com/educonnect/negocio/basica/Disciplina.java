@@ -2,10 +2,12 @@ package br.com.educonnect.negocio.basica;
 
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Disciplina {
@@ -15,6 +17,9 @@ public class Disciplina {
 	private long id;
 	
 	private String disciplina;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Ementa ementa;
 	
 	public Disciplina() {
 		super();
@@ -31,6 +36,15 @@ public class Disciplina {
 	}
 	public void setDisciplina(String disciplina) {
 		this.disciplina = disciplina;
+	}
+	
+
+	public Ementa getEmenta() {
+		return ementa;
+	}
+
+	public void setEmenta(Ementa ementa) {
+		this.ementa = ementa;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package br.com.educonnect.negocio.cadastro;
 import java.util.List;
 
 import br.com.educonnect.negocio.basica.Discente;
+import br.com.educonnect.negocio.basica.Pessoa;
 
 public interface ICadastroDiscente {
 
@@ -19,4 +20,6 @@ public interface ICadastroDiscente {
 	Discente procurarDiscenteEmail(String email) throws DiscenteNaoExisteException;
 
 	Discente salvarDiscenteSemException(Discente discente);
+	
+	List<String> listarDiscentesPorIdTurma(long id);
 }

@@ -2,7 +2,6 @@ package br.com.educonnect.negocio.cadastro;
 
 import java.util.List;
 
-import br.com.educonnect.negocio.basica.Discente;
 import br.com.educonnect.negocio.basica.Matricula;
 
 public interface ICadastroMatricula {
@@ -16,5 +15,5 @@ public interface ICadastroMatricula {
 
 	void deletarMatricula(Matricula matricula);
 
-	//List<Matricula> listarMatriculasByIdDiscente(long idDis);
+	// List<Matricula> listarMatriculasByIdDiscente(long idDis);
 }

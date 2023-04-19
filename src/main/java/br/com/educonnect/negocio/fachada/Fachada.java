@@ -355,4 +355,35 @@ public class Fachada {
 		return this.cadastroDocente.salvarDocente(doc);
 	}
 
+	public List<String> listarDiscentesByTurma(long idTurma) {
+		
+		return this.cadastroDiscente.listarDiscentesPorIdTurma(idTurma);
+	}
+
+	public Universidade salvarUniversidade(Universidade universidade) {
+		// TODO Auto-generated method stub
+		return this.cadastrarUniversidade.salvarUniversidade(universidade);
+	}
+
+	public void deletarUniversidade(long id) {
+		this.cadastrarUniversidade.deletarUniversidadeId(id);
+		
+	}
+
+	public Universidade encontrarUniversidadeId(long id) throws UniversidadeNaoExisteException{
+		// TODO Auto-generated method stub
+		return this.cadastrarUniversidade.encontrarUniversidadeId(id);
+	}
+
+	public List<Universidade> listarUniversidade() {
+		return this.cadastrarUniversidade.listarUniversidade();
+	}
+
+	public Universidade atualizarUniversidade(Universidade uni, long id) throws UniversidadeNaoExisteException {
+		Universidade univer = this.cadastrarUniversidade.encontrarUniversidadeId(id);
+		
+		uni.setId(id);
+		return uni;
+	}
+	
 }

@@ -49,7 +49,8 @@ public class Fachada {
 	@Autowired
 	private ICadastroTurma cadastroTurma;
 	@Autowired
-	private ICadastroUniversidade cadastroUniversidade;
+	private ICadastroUniversidade cadastrarUniversidade;
+
 	@Autowired
 	private ICadastroCurso cadastroCurso;
 	@Autowired
@@ -80,34 +81,17 @@ public class Fachada {
 	}
 
 	// UNIVERSIDADE
-	public Universidade salvarUniversidade(Universidade universidade) throws UniversidadeJaExisteException {
-		return cadastroUniversidade.salvarUniversidade(universidade);
+	public Universidade cadastrarUniversidade(Universidade uni) throws UniversidadeJaExisteException {
+		return this.cadastrarUniversidade(uni);
 	}
 
 	public Universidade getUniversidade(Long id) {
 		return this.getUniversidade(id);
 	}
 
-	public void deletarUniversidade(long id) {
-		this.cadastroUniversidade.deletarUniversidadeId(id);
-	}
-	
-	public List<Universidade> listarUniversidade() {
-		return this.cadastroUniversidade.listarUniversidade();
-	}
-
-	public Universidade atualizarUniversidade(Universidade uni, long universidadeId) throws UniversidadeNaoExisteException {
-		return this.cadastroUniversidade.atualizarUniversidade(uni, 0);
-	}
-
-	public Universidade encontrarUniversidadeId(long id) throws UniversidadeNaoExisteException {
-		return this.cadastroUniversidade.encontrarUniversidadeId(id);
-	}
-
 	public void setUniversidade(Universidade uni) {
 		this.setUniversidade(uni);
 	}
-
 
 	public void removerUniversidade(Long id) {
 		this.removerUniversidade(id);
@@ -210,11 +194,6 @@ public class Fachada {
 	public List<Discente> listarDiscentes() {
 		return this.cadastroDiscente.listarDiscentes();
 	}
-	
-	public List<String> listarDiscentesByTurma(long id){
-		return this.cadastroDiscente.listarDiscentesPorIdTurma(id);
-	}
-
 	public void deletarDiscenteId(Long id) {
 		this.cadastroDiscente.deletarDiscenteId(id);
 	}
@@ -229,6 +208,7 @@ public class Fachada {
 
 	public Matricula adicionarMatricula(long idD, Matricula mat, long idT)
 			throws DiscenteNaoExisteException, TurmaNaoExisteException, MatriculaIgualException {
+		// exceção discente nao existe
 		Discente dis = this.cadastroDiscente.procurarDiscenteId(idD);
 		Turma turma = this.cadastroTurma.procurarTurmaId(idT);
 		// ver se o discente ja tem essa matricula criada

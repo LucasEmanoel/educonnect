@@ -1,97 +1,69 @@
-package src.main.java.br.com.educonnect.negocio.basica;
+package br.com.educonnect.negocio.basica;
 
-import javax.persistence.*;
-import jakarta.persistence.Column;
+import java.util.Objects;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.OneToOne;
 
 @Entity
-@Table (name = "disciplina")
 public class Disciplina {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	
-	@Column(name = "nome")
-    private String nome;
+	private String disciplina;
 	
-	@Column(name = "codigo")   
-    private String codigo;
-    
-    @OneToMany(cascade = CascadeType.notifyAll();
-    .codigo orphanRemoval = true)
-    @JoinColumn(name = "disciplina_id")
-    private List<Ementa> ementas = new ArrayList<>();
-   
-    @ManyToOne
-    @JoinColumn(name = "docente_id")
-    private Docente docente;
-    
-    @Column(name = "horario")
-    private Time horario;
-    
-    public Disciplina( String nome, String codigo) {
-        this.nome = nome;
-        this.codigo = codigo;
-    }
-    
-    public void adicionarDocente(String nome) {
-        this.nomeProfessor = nome;
-    }
-    
-    public void removerDocente() {
-        this.nomeProfessor = null;
-    }
-    
-    public void modificarHorario(Horario horario) {
-        // codigo para modificar o horario da disciplina
-        /* Duvidas qual hor�rio ideal? Restricoes de 22:00 horas
-        * ate as 6:00? Horario noturno 18:30 as 21:30?
+	@OneToOne(cascade = CascadeType.ALL)
+	private Ementa ementa;
+	
+	public Disciplina() {
+		super();
+	}
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getDisciplina() {
+		return disciplina;
+	}
+	public void setDisciplina(String disciplina) {
+		this.disciplina = disciplina;
+	}
+	
 
-         */
-    }
-    
-    // getters e setters
-    
-    public String getNome(){
-        return nome;
-    }
-    
-    public void setNome(String nome){
-        this.nome = nome;
-    }
-    
-    public String getNomeProfessor(String nomeProfessor){
-        return nomeProfessor;
-    }
-    
-    public void setNomeProfessor(String nomeProfessor){
-        this.nomeProfessor = nomeProfessor;
-    }
-    
-    public String getCodigo(){
-        return codigo;
-    }
-    
-    public void setCodigo(String codigo){
-        this.codigo = codigo;
-    }
-    
-    public Ementa getEmenta(){
-        return ementa;
-    }
-    
-    public void setEmenta(Ementa ementa){
-        this.ementa = ementa;
-    }
-    
+	public Ementa getEmenta() {
+		return ementa;
+	}
 
+	public void setEmenta(Ementa ementa) {
+		this.ementa = ementa;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(disciplina);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Disciplina other = (Disciplina) obj;
+		return Objects.equals(disciplina, other.disciplina);
+	}
+	
+	
+	
 }
-
-

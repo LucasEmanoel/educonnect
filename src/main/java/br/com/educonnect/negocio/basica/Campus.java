@@ -1,42 +1,52 @@
-package src.main.java.br.com.educonnect.negocio.basica;
-import java.util.ArrayList;
+package br.com.educonnect.negocio.basica; 
 
-import javax.persistence.Entityl;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.List;
 
-@Entity
-@Table(name = "campi")
-public class Campus {
-	
-		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int id;
-		
-        private String nome;
-        
-        @ManyToOne
-        private Universidade universidade;
-        
-        public Campus() {}
-        
-        public Campus(String nome, Universidade universidade) {
-            this.nome = nome;
-            this.universidade = universidade;
-        }
-        
-        public String getNome() {
-            return nome;
-        }
-        
-        public void adicionarCurso(Cursos cursos){
-            this.curso.add(cursos);
-        }
-        
-    Campus campus = new Campus(01, "UAG - Unidade Acadêmica de Garanhuns");  
-    
-
-}
+import jakarta.persistence.Entity;                                                                                   
+import jakarta.persistence.GeneratedValue;                                                                           
+import jakarta.persistence.GenerationType;                                                                           
+import jakarta.persistence.Id;                                                                                       
+import jakarta.persistence.OneToMany;                                                                                    
+                                                                                                                     
+                                                                                                                     
+@Entity                                                                                                                                                                                                            
+public class Campus {                                                                                                
+	                                                                                                                 
+	@Id                                                                                                              
+	@GeneratedValue(strategy = GenerationType.IDENTITY)                                                              
+	private long id;                                                                                                 
+	                                                                                                                 
+	private String nome;                                                                                             
+	 
+	@OneToMany                                                                                
+	private List<Curso> curso;                                                                                       
+                                                                                                                 
+	public Campus() {}                                                                                               
+	                                                                                                                 
+	                                                                                                                 
+	//getters e setters                                                                                              
+	                                                                                                                 
+	public long getId() {                                                                                            
+		return id;                                                                                                   
+	}                                                                                                                
+                                                                                                                     
+	public void setId(long id) {                                                                                     
+		this.id = id;                                                                                                
+	}                                                                                                                
+	                                                                                                                 
+	public String getNome() {                                                                                        
+		return nome;                                                                                                 
+	}                                                                                                                
+	                                                                                                                 
+	public void setNome(String nome) {                                                                               
+		this.nome = nome;                                                                                            
+	}                                                                                                                
+	                                                                                                                 
+		public List<Curso> getCurso(){                                                                               
+			return curso;                                                                                            
+	}                                                                                                                
+    	                                                                                                             
+    	public void setCurso(List<Curso> curso) {                                                                    
+    		this.curso = curso;                                                                                      
+    	}                                                                                                            
+}                                                                                                                                                           

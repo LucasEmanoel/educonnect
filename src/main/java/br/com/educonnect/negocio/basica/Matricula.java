@@ -3,91 +3,70 @@ package src.main.java.br.com.educonnect.negocio.basica;
 import java.util.Date;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 public class Matricula {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(unique = true, nullable = false)
 	private long id;
-	
-	//Tem time = createAt no Banco
-	@Temporal(TemporalType.DATE)
+
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date data;
-	
-	private int semestre;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Horario horario;
-	
-	//nao deletar disciplina com cascade
+
+	// nao deletar disciplina com cascade
 	@OneToOne
-	private Disciplina disciplina;
-	
+	private Turma turma;
+
 	public Matricula() {
 		super();
 	}
-	
-	public Matricula(Date data, int semestre, Horario horario, Disciplina disciplina) {
+
+	public Matricula(Date data, Turma turma) {
 		super();
 		this.data = data;
-		this.semestre = semestre;
-		this.horario = horario;
-		this.disciplina = disciplina;
+		this.turma = turma;
 	}
 
-	
-
-	public Matricula(int semestre, Disciplina disciplina) {
+	public Matricula(Turma turma) {
 		super();
-		this.semestre = semestre;
-		this.disciplina = disciplina;
+		this.turma = turma;
 	}
 
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public Date getData() {
 		return data;
 	}
+
 	public void setData(Date data) {
 		this.data = data;
 	}
-	public int getSemestre() {
-		return semestre;
+
+	public Turma getTurma() {
+		return turma;
 	}
-	public void setSemestre(int semestre) {
-		this.semestre = semestre;
-	}
-	public Horario getHorario() {
-		return horario;
-	}
-	public void setHorario(Horario horario) {
-		this.horario = horario;
-	}
-	public Disciplina getDisciplina() {
-		return disciplina;
-	}
-	public void setDisciplina(Disciplina disciplina) {
-		this.disciplina = disciplina;
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(disciplina, semestre);
+		return Objects.hash(turma);
 	}
 
 	@Override
@@ -99,8 +78,7 @@ public class Matricula {
 		if (getClass() != obj.getClass())
 			return false;
 		Matricula other = (Matricula) obj;
-		return Objects.equals(disciplina, other.disciplina) && semestre == other.semestre;
+		return Objects.equals(turma, other.turma);
 	}
-	
-	
+
 }
